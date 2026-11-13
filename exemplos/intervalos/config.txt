@@ -1,0 +1,8 @@
+tarefa=intervalos
+modelos=fable,opus
+esforcos=low,medium,high,xhigh,max
+repeticoes=1
+isolado=1
+claude=2.1.323 (Claude Code)
+inicio=2026-11-12T21:24:37-03:00
+fim=2026-11-12T21:42:03-03:00

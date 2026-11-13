@@ -1,0 +1,8 @@
+tarefa=carrinho
+modelos=fable
+esforcos=low,high
+repeticoes=3
+isolado=1
+claude=2.1.323 (Claude Code)
+inicio=2026-11-12T22:06:10-03:00
+fim=2026-11-12T22:09:56-03:00

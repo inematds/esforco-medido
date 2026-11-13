@@ -1,0 +1,5 @@
+resultados/
+varredura*.log
+__pycache__/
+*.pyc
+longrun/

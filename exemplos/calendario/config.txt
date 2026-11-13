@@ -1,0 +1,8 @@
+tarefa=calendario
+modelos=fable,opus
+esforcos=low,medium,high,xhigh,max
+repeticoes=1
+isolado=1
+claude=2.1.323 (Claude Code)
+inicio=2026-11-12T21:42:29-03:00
+fim=2026-11-12T22:05:48-03:00

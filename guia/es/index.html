@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>esfuerzo medido — qué cambia realmente el esfuerzo en Claude</title>
+<meta name="description" content="Kit gratis: mide qué cambia el nivel de esfuerzo en Claude Fable 5.2 y Opus 5.5 (herramientas, verificaciones, tiempo, aciertos) y trae 14 consejos con fuentes.">
+<link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/esforco-medido/guia/">
+<link rel="alternate" hreflang="en" href="https://inematds.github.io/esforco-medido/guia/en/">
+<link rel="alternate" hreflang="es" href="https://inematds.github.io/esforco-medido/guia/es/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
+    --txt:#e9e9ee; --mut:#9a9aa6; --amb:#E2A23B; --amb2:#f0c070; --sky:#38bdf8; --pro:#cbd5e1;
+    color-scheme:dark;
+  }
+  body.light{
+    --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea;
+    --txt:#1a1a22; --mut:#5b5b68; --amb:#b9791d; --amb2:#a16207; --sky:#0369a1; --pro:#b45309;
+    color-scheme:light;
+  }
+  body.light .hero .glow{opacity:.5}
+  body.light pre{background:#0e0e14;color:#d6d6e0}
+  body.light pre .c{color:#8a8a98}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Sora,sans-serif;line-height:1.15;margin:0}
+  a{color:var(--amb);text-decoration:none}
+  code,pre{font-family:"JetBrains Mono",monospace}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  .mut{color:var(--mut)} .amb{color:var(--amb)}
+  .chip{display:inline-block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amb);font-weight:600;font-family:Sora}
+  nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(12,12,16,.78);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:22px;height:60px}
+  nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
+  nav .brand .emoji{font-size:1.25rem}
+  nav .sep{color:var(--mut);opacity:.45}
+  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .inema:hover{filter:brightness(1.15)}
+  nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .pro:hover{filter:brightness(1.15)}
+  nav .clubpro{display:inline-flex;align-items:center;gap:6px}
+  nav .links{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:.92rem}
+  nav .links a.sec{color:var(--mut)} nav .links a.sec:hover{color:var(--txt)}
+  .lang{display:inline-flex;gap:2px;font-family:Sora;font-size:.78rem}
+  .lang a{color:var(--mut);padding:.2em .45em;border-radius:6px} .lang a.on{color:var(--amb);background:rgba(226,162,59,.12)}
+  .tgl{background:var(--bg2);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
+  .tgl:hover{border-color:var(--amb)}
+  .btn{display:inline-block;background:var(--amb);color:#1a1206;font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  @media(max-width:760px){nav .links a.sec{display:none}}
+  @media(max-width:520px){nav .wrap{gap:8px;padding:8px 14px;height:auto;flex-wrap:wrap} nav .links{gap:8px;margin-left:0;width:100%;justify-content:space-between} nav .btn{padding:.45em .7em;font-size:.82rem} .tgl{width:34px;height:34px}}
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero .glow{position:absolute;inset:-40% -20% auto auto;width:70%;height:600px;background:radial-gradient(closest-side,rgba(226,162,59,.22),transparent 70%);pointer-events:none}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:74px 22px}
+  .hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.025em}
+  .hero p.lead{font-size:1.18rem;color:var(--mut);margin:1.1em 0 1.6em;max-width:34ch}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .hero figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
+  .hero figure img{width:100%;height:auto;display:block}
+  .resumo{padding:38px 0 34px;border-bottom:1px solid var(--line)}
+  .resumo p{font-size:1.12rem;line-height:1.7;max-width:74ch;margin:.55em 0 0}
+  @media(max-width:780px){.hero .wrap{grid-template-columns:1fr;padding:48px 22px}}
+  section{padding:62px 0;border-bottom:1px solid var(--line)}
+  section h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;letter-spacing:-.02em}
+  section .sub{color:var(--mut);margin:.6em 0 2em;max-width:62ch}
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.g3,.g4{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h3{font-size:1.05rem;margin-bottom:.4em}
+  .card p{color:var(--mut);font-size:.92rem;margin:0}
+  .num{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:8px;background:rgba(226,162,59,.14);color:var(--amb);font-family:Sora;font-weight:800;font-size:.9rem;margin-bottom:.7em}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+  .flow span{background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:.45em .9em;font-size:.85rem;font-family:Sora;font-weight:600}
+  .flow .arr{color:var(--amb);border:none;background:none;padding:0 .1em}
+  pre{background:#0a0a0e;border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow:auto;font-size:.86rem;line-height:1.6;color:#d6d6e0}
+  pre .c{color:#6f6f7c} pre .k{color:var(--amb2)} pre .s{color:#9ece6a}
+  .step{display:grid;grid-template-columns:46px minmax(0,1fr);gap:16px;margin-bottom:26px}
+  .step>div,.card{min-width:0}
+  p code,li code,td code{overflow-wrap:anywhere}
+  .step .b{width:46px;height:46px;border-radius:12px;background:var(--amb);color:#1a1206;font-family:Sora;font-weight:800;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:1.12rem;margin-bottom:.3em}
+  .step p{color:var(--mut);margin:.2em 0 .7em}
+  .ex{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:680px){.ex{grid-template-columns:1fr}}
+  .ex figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+  .ex figure img{width:100%;height:auto;display:block}
+  .ex figcaption{padding:12px 14px;font-size:.88rem;color:var(--mut);background:var(--card)}
+  .phase{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .phase:last-child{border:none}
+  .phase .tag{flex:0 0 92px;font-family:Sora;font-weight:800;color:var(--amb)}
+  .phase .d strong{display:block;margin-bottom:.2em}
+  .phase .d span{color:var(--mut);font-size:.92rem}
+  footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:0 4px}
+  .techhead{background:var(--bg2);border-top:3px solid var(--amb);padding:58px 0 8px}
+  .techhead h2{font-family:Sora;margin:.3em 0 0}
+  .techzone{background:var(--bg2)}
+  .tw{overflow-x:auto;border:1px solid var(--line);border-radius:14px}
+  table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:560px}
+  th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left}
+  th{font-family:Sora;font-size:.8rem;color:var(--amb);background:var(--card)}
+  tr:last-child td{border-bottom:none}
+  .note{font-size:.85rem;color:var(--mut);margin-top:12px}
+  .big{font:800 clamp(2rem,6vw,3.2rem) Sora,sans-serif;color:var(--amb)}
+  .dica{border-left:3px solid var(--amb);padding:4px 0 4px 14px;margin:0 0 14px}
+  .dica b{font-family:Sora} .dica span{color:var(--mut);display:block;font-size:.92rem}
+  table.fit{min-width:0}
+  .hint{display:none;font-size:.78rem;color:var(--mut);margin:6px 0 0}
+  @media(max-width:600px){.opt{display:none} .hint{display:block} th,td{padding:8px 8px}}
+  .fonte{font-size:.72rem;color:var(--mut);font-family:"JetBrains Mono",monospace}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="brand" href="#top"><span class="emoji">🎚️</span> esfuerzo medido</a>
+  <span class="sep">|</span>
+  <span class="clubpro">
+    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <span class="sep">-</span>
+    <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
+  </span>
+  <div class="links">
+    <a class="sec" href="#mito">Esfuerzo ≠ tiempo</a>
+    <a class="sec" href="#modelos">Fable × Opus</a>
+    <a class="sec" href="#medido">Qué medí</a>
+    <a class="sec" href="#dicas">Consejos</a>
+    <a class="sec" href="#tecnico">Kit (técnico)</a>
+    <span class="lang"><a href="../">PT</a><a href="../en/">EN</a><a class="on" href="./">ES</a></span>
+    <button class="tgl" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">🌙</button>
+    <a class="btn" href="https://github.com/inematds/esforco-medido" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div>
+      <span class="chip">Claude Fable 5.2 · Claude Opus 5.5</span>
+      <h1>Subes el esfuerzo y pagas más. <span class="amb">Esfuerzo medido</span> muestra qué cambia.</h1>
+      <p class="lead">Hice 30 mediciones: en las 3 tareas, el esfuerzo mínimo acertó todo, igual que el máximo, que costó cerca de 14× más. El esfuerzo cambia cuánto piensa y verifica la IA, y el nivel “alto” de un modelo no es el mismo que el del otro.</p>
+      <div class="cta">
+        <a class="btn" href="#mito">Entender en 5 minutos</a>
+        <a class="btn ghost" href="https://github.com/inematds/esforco-medido" target="_blank" rel="noopener">Ver en GitHub</a>
+      </div>
+    </div>
+    <figure><img src="../assets/banner-es.jpg" alt="Banner de esfuerzo medido: botón de esfuerzo y panel de medición"></figure>
+  </div>
+</header>
+
+<section id="resumo" class="resumo"><div class="wrap">
+  <span class="chip">En resumen</span>
+  <p>Quien usa Claude elige un nivel de esfuerzo (de <em>low</em> a <em>max</em>) pensando que más esfuerzo significa que la IA trabaja más tiempo y acierta más. No es exactamente así. El esfuerzo cambia cuánto piensa el modelo y cuántas veces actúa y verifica su propio trabajo; el tiempo y el costo son consecuencia de eso. Este kit gratis lo muestra con cifras: ejecuta la misma tarea en cada nivel de Fable 5.2 y Opus 5.5, cuenta lo que hizo el modelo y asigna una puntuación con un verificador que no puede ver. También incluye 14 consejos con fuentes. Para leerlo, no necesitas nada; para medir, Python 3 y Claude Code.</p>
+  <figure style="margin:26px 0 0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000"><img src="../assets/banner-grade-es.jpg" alt="Qué ofrece el kit: misma tarea en 5 niveles, verificador oculto, recuento de herramientas y verificaciones, Fable 5.2 × Opus 5.5, 14 consejos" loading="lazy" style="width:100%;display:block"></figure>
+</div></section>
+
+<!--VIDEO-->
+
+<section id="mito"><div class="wrap">
+  <span class="chip">Qué es el esfuerzo</span>
+  <h2>El esfuerzo no es un cronómetro. <span class="amb">Es cuánto piensa y actúa la IA.</span></h2>
+  <p class="sub">La documentación de Anthropic dice que el nivel “cambia cómo piensa el modelo y cuántas llamadas a herramientas hace”. Una llamada a herramienta es cada vez que la IA abre un archivo, lo edita, ejecuta una prueba o hace una búsqueda. El tiempo que tarda la tarea es una consecuencia, no el botón.</p>
+  <div class="grid g3">
+    <div class="card"><div class="num">1</div><h3>Piensa más antes de actuar</h3><p>En el nivel alto, el razonamiento de cada paso es más profundo. En Fable 5.2, a partir de <em>high</em>, hasta piensa antes de responder “hola”.</p></div>
+    <div class="card"><div class="num">2</div><h3>Actúa y verifica más</h3><p>Hace más llamadas a herramientas: abre más archivos, ejecuta más pruebas y verifica lo que hizo. En el nivel bajo, agrupa pasos y verifica menos.</p></div>
+    <div class="card"><div class="num">3</div><h3>Se detiene menos a mitad de camino</h3><p>En los niveles bajos, el modelo tiende a terminar antes, indicando lo que falta u ofreciendo continuar. Entonces <strong>tú</strong> vuelves y le pides el resto.</p></div>
+  </div>
+  <p class="note">Lo que el esfuerzo casi no cambia: la extensión de la respuesta. Para una respuesta corta o larga, indícalo en el pedido. Fuente: guía de migración de la API de Anthropic (Fable 5.2 y Opus 5.5), consultada el 12/11/2026.</p>
+</div></section>
+
+<section id="modelos"><div class="wrap">
+  <span class="chip">Fable 5.2 × Opus 5.5</span>
+  <h2>El mismo nombre <span class="amb">no significa lo mismo</span> en los dos modelos</h2>
+  <p class="sub">Los cinco niveles siguen el mismo orden, pero el razonamiento detrás de cada uno cambia de un modelo a otro. Comparar “Fable high” con “Opus high” como si fueran iguales puede engañarte.</p>
+  <div class="tw"><table class="fit">
+    <tr><th></th><th>Claude Fable 5.2</th><th>Claude Opus 5.5</th></tr>
+    <tr><td>Predeterminado en la API (cuando nadie indica el nivel)</td><td><b>high</b></td><td><b>medium</b></td></tr>
+    <tr><td>Por dónde empezar, según Anthropic</td><td>high (donde se obtiene la mayor parte de la mejora)</td><td>medium y probar los niveles cercanos</td></tr>
+    <tr><td>Lo sorprendente</td><td><em>low</em> quedó cerca de Fable 5.1 en niveles más altos</td><td><em>medium</em> superó a <em>high</em> de Opus 5; <em>low</em> se acercó a ese nivel en código</td></tr>
+    <tr><td>xhigh y max</td><td>xhigh: un poco más de puntuación, muchos más tokens; max: el límite, poco frecuente</td><td>solo donde mediste una mejora; en xhigh/max piensa más por turno que Opus 5</td></tr>
+    <tr><td>Trampa</td><td>“piensa menos” en el prompt no funciona a partir de medium: baja el nivel</td><td>quien copió el nivel de Opus 5 ejecuta un nivel distinto del que cree</td></tr>
+    <tr><td>Precio en la API (por millón de tokens, entrada/salida)</td><td>US$ 8 / US$ 40</td><td>US$ 4 / US$ 20</td></tr>
+  </table></div>
+  <p class="note">En Claude Code, consulta el nivel de la sesión con <code>/effort status</code> y cámbialo con <code>/effort &lt;nível&gt;</code>; el nuevo nivel se aplica a partir del siguiente mensaje. <em>Ultracode</em> no es un nivel: es una configuración que arma un equipo de agentes con el nivel de esfuerzo que tenga la sesión.</p>
+</div></section>
+
+<section id="medido"><div class="wrap">
+  <span class="chip">Qué medí</span>
+  <h2>En 3 tareas cortas, <span class="amb">el esfuerzo mínimo acertó igual que el máximo</span></h2>
+  <p class="sub">3 tareas de código (fácil, búsqueda de errores y calendario con feriados móviles), cada una en 5 niveles en ambos modelos: 30 rondas, copia limpia, verificador oculto. Medido el 12/11/2026, una ronda por combinación.</p>
+  <div class="grid g3" style="margin-bottom:26px">
+    <div class="card"><div class="big">30 de 30</div><p>rondas con <strong>puntuación máxima</strong>: de <em>low</em> a <em>max</em>, en ambos modelos, todas acertaron todo.</p></div>
+    <div class="card"><div class="big">~14×</div><p>el costo de Fable 5.2 en <em>max</em> frente a <em>low</em> (US$ 9,78 × US$ 0,72), y cerca de 25× el tiempo (26 min × 1 min).</p></div>
+    <div class="card"><div class="big">130×</div><p>más pensamiento en Fable <em>max</em> que en <em>low</em> (132 mil × 1 mil tokens). Eso es lo que compras con el esfuerzo.</p></div>
+  </div>
+  <div class="tw"><table>
+    <tr><th>Suma de las 3 tareas</th><th>Puntuación</th><th>Tiempo</th><th>Pensamiento (tokens)</th><th class="opt">Herramientas</th><th>Verificaciones</th><th>Costo equivalente*</th></tr>
+    <tr><td>Fable 5.2 · low</td><td>48/48</td><td>1 min 05 s</td><td>1.015</td><td class="opt">16</td><td>3</td><td>US$ 0,72</td></tr>
+    <tr><td>Fable 5.2 · medium</td><td>48/48</td><td>1 min 26 s</td><td>1.646</td><td class="opt">12</td><td>4</td><td>US$ 0,83</td></tr>
+    <tr><td>Fable 5.2 · high</td><td>48/48</td><td>1 min 53 s</td><td>3.174</td><td class="opt">23</td><td>7</td><td>US$ 1,05</td></tr>
+    <tr><td>Fable 5.2 · xhigh</td><td>48/48</td><td>5 min 03 s</td><td>18.580</td><td class="opt">33</td><td>10</td><td>US$ 2,21</td></tr>
+    <tr><td>Fable 5.2 · max</td><td>48/48</td><td>26 min 42 s</td><td>132.112</td><td class="opt">56</td><td>25</td><td>US$ 9,78</td></tr>
+    <tr><td>Opus 5.5 · low</td><td>48/48</td><td>1 min 04 s</td><td>253</td><td class="opt">11</td><td>5</td><td>US$ 0,30</td></tr>
+    <tr><td>Opus 5.5 · medium</td><td>48/48</td><td>1 min 29 s</td><td>760</td><td class="opt">13</td><td>4</td><td>US$ 0,39</td></tr>
+    <tr><td>Opus 5.5 · high</td><td>48/48</td><td>1 min 58 s</td><td>2.036</td><td class="opt">12</td><td>4</td><td>US$ 0,48</td></tr>
+    <tr><td>Opus 5.5 · xhigh</td><td>48/48</td><td>3 min 35 s</td><td>7.472</td><td class="opt">26</td><td>10</td><td>US$ 0,79</td></tr>
+    <tr><td>Opus 5.5 · max</td><td>48/48</td><td>18 min 06 s</td><td>92.889</td><td class="opt">48</td><td>16</td><td>US$ 3,77</td></tr>
+  </table></div>
+  <div class="grid g2" style="margin-top:22px">
+    <div class="card"><h3>Qué aumentó con el esfuerzo</h3><p>El pensamiento aumentó en cada nivel, en ambos modelos. Las verificaciones (ejecutar el código para comprobarlo) crecieron poco de <em>low</em> a <em>high</em> (Fable 3 → 7, Opus 5 → 4) y se dispararon en <em>xhigh</em> y <em>max</em> (Fable 25, Opus 16): ahí el modelo escribe scripts de prueba, busca casos límite y vuelve a verificar.</p></div>
+    <div class="card"><h3>Qué no cambió</h3><p>La puntuación. En estas tareas cortas y bien descritas, el nivel más bajo ya las resolvió. Opus 5.5 en <em>low</em> acertó todo con el menor costo (US$ 0,30), cerca de 32× menos que Fable 5.2 en <em>max</em>.</p></div>
+  </div>
+  <p class="hint">desliza la tabla hacia un lado →</p>
+  <p class="note">* Costo que Claude Code calcula según la tabla de la API (sumado antes de redondear); con la suscripción pagas con tu límite, así que ~14× y ~32× son proporciones de costo equivalente, no de tu límite. Pensamiento = tokens de razonamiento contados en el registro de cada ronda (en RESULTADO.md, el número entre paréntesis). <strong>Lee con cuidado:</strong> son tareas cortas, una ronda cada una. No muestran en qué casos ayuda el esfuerzo alto: según Anthropic, en trabajos largos el esfuerzo bajo tiende a detenerse antes de terminar, y los problemas abiertos y difíciles se benefician de más esfuerzo. En estas rondas, ningún modelo se detuvo antes ni llamó a un subagente. Cuadros completos: <a href="https://github.com/inematds/esforco-medido/tree/main/exemplos" target="_blank" rel="noopener">exemplos/</a>.</p>
+  <p class="note"><strong>Repetición (ruido):</strong> Fable 5.2 en la tarea <em>carrinho</em> (carrito), <em>low</em> y <em>high</em> 3 veces cada uno → todas 12/12; <em>low</em> 26–33 s, <em>high</em> 39–49 s, y el <em>high</em> siempre pensó más. En cambio, el número de herramientas varió de 3 a 12 entre rondas iguales: compara el razonamiento y el tiempo, no un recuento aislado de herramientas.</p>
+</div></section>
+
+<section id="dicas"><div class="wrap">
+  <span class="chip">14 consejos</span>
+  <h2>Cómo elegir el esfuerzo <span class="amb">sin pagar de más</span></h2>
+  <p class="sub">Cada consejo incluye su fuente. La lista completa, con los detalles, está en <a href="https://github.com/inematds/esforco-medido/blob/main/dicas/DICAS.md" target="_blank" rel="noopener">dicas/DICAS.md</a> (en portugués).</p>
+  <div class="grid g2">
+    <div>
+      <div class="dica"><b>1. El esfuerzo no es un cronómetro.</b><span>Cambia cuánto piensa y actúa; el tiempo es una consecuencia.</span></div>
+      <div class="dica"><b>2. El mismo nombre, distinta intensidad.</b><span>No compares “high” con “high” entre modelos: mide.</span></div>
+      <div class="dica"><b>3. La extensión de la respuesta depende del pedido.</b><span>El esfuerzo casi no la cambia.</span></div>
+      <div class="dica"><b>4. Los valores predeterminados son diferentes.</b><span>API: Fable en high, Opus en medium. En Claude Code: <code>/effort status</code>.</span></div>
+      <div class="dica"><b>5. Fable 5.2: empieza en high.</b><span>Baja a medium para el día a día y a low para tareas rápidas y subagentes.</span></div>
+      <div class="dica"><b>6. Opus 5.5: empieza en medium.</b><span>En varias pruebas de código, low se acercó y costó mucho menos.</span></div>
+      <div class="dica"><b>7. Usa xhigh solo donde mediste una mejora.</b><span>Max sirve para medir el límite o para esa tarea excepcional en la que el tiempo no importa.</span></div>
+    </div>
+    <div>
+      <div class="dica"><b>8. Usa esfuerzo bajo para terminar antes.</b><span>Pega el bloque “terminar el trabajo” en CLAUDE.md (está en el kit).</span></div>
+      <div class="dica"><b>9. “Piensa menos” no funciona en Fable 5.2.</b><span>Baja el nivel en vez de pedirlo.</span></div>
+      <div class="dica"><b>10. En high+, Fable piensa hasta para decir “hola”.</b><span>Para un turno fácil, usa un nivel bajo.</span></div>
+      <div class="dica"><b>11. En xhigh/max, Fable puede llamar a subagentes.</b><span>Un subagente es otra copia de la IA que abre para una parte del trabajo, y cada una genera un costo. Anthropic dice que lo hace para revisar su propio trabajo; en las rondas cortas de aquí, no lo hizo.</span></div>
+      <div class="dica"><b>12. Ultracode no es un nivel.</b><span>Es un equipo de agentes; <code>--effort ultracode</code> lo activa y lo pone en xhigh.</span></div>
+      <div class="dica"><b>13. Combina niveles en el mismo trabajo.</b><span>Planifica en medium y sube el nivel para la parte larga que se ejecuta sola.</span></div>
+      <div class="dica"><b>14. Mide con tu tarea.</b><span>Elige el nivel más bajo que acierta (<a href="#guia">cómo usarlo ↓</a>).</span></div>
+    </div>
+  </div>
+</div></section>
+
+<div id="tecnico" class="techhead"><div class="wrap">
+  <span class="chip">Parte técnica</span>
+  <h2>El kit: <span class="amb">para quienes quieren medir con sus propias tareas</span></h2>
+  <p class="sub">De aquí en adelante viene la parte técnica: instalar, ejecutar el medidor y crear una tarea propia. <strong>No necesitas</strong> esta parte para entender lo anterior.</p>
+</div></div>
+
+<div class="techzone">
+<section id="oque"><div class="wrap">
+  <span class="chip">Qué es</span>
+  <h2>Un medidor de esfuerzo <span class="amb">que la IA no puede engañar</span></h2>
+  <p class="sub">Tres piezas: el medidor, el lector de rondas y las tareas con un verificador oculto.</p>
+  <div class="grid g3">
+    <div class="card"><h3>🎚️ medir.sh</h3><p>Ejecuta la tarea en cada combinación de modelo × esfuerzo, cada ronda en una copia limpia y con un HOME temporal: el modelo no lee tu CLAUDE.md, hooks, plugins, skills ni MCP. Usa tu suscripción (quita ANTHROPIC_API_KEY del entorno).</p></div>
+    <div class="card"><h3>🔎 relatorio.py</h3><p>Lee el registro de cada ronda y cuenta herramientas por tipo, verificaciones (código ejecutado para comprobar), ediciones, relecturas, subagentes, tokens de pensamiento, tiempo, costo equivalente y si al final ofrece continuar.</p></div>
+    <div class="card"><h3>🧪 tarefas/</h3><p>3 tareas con verificador oculto: <code>intervalos</code> (fácil), <code>carrinho</code> (6 errores ocultos) y <code>calendario</code> (5 funciones con feriados móviles). La IA ve pocas pruebas; la puntuación se calcula con muchas.</p></div>
+  </div>
+</div></section>
+
+<section id="fluxo"><div class="wrap">
+  <span class="chip">Cómo funciona</span>
+  <h2>Una ronda, de principio a fin</h2>
+  <p class="sub">Cada fila del cuadro final corresponde a una ronda como esta.</p>
+  <div class="flow">
+    <span>copia limpia de la tarea</span><span class="arr">→</span>
+    <span>HOME temporal</span><span class="arr">→</span>
+    <span>claude -p --model --effort</span><span class="arr">→</span>
+    <span>registro stream-json</span><span class="arr">→</span>
+    <span>verificador oculto</span><span class="arr">→</span>
+    <span>RESULTADO.md</span>
+  </div>
+</div></section>
+
+<section id="pre"><div class="wrap">
+  <span class="chip">Requisitos</span>
+  <h2>Qué necesitas</h2>
+  <p class="sub">Sin API: todo con la suscripción.</p>
+  <div class="grid g3">
+    <div class="card"><h3>Python 3</h3><p>Solo la biblioteca estándar.</p><pre><span class="k">python3</span> --version</pre></div>
+    <div class="card"><h3>Claude Code con sesión iniciada</h3><p>Con acceso a Fable 5.2 y Opus 5.5 en tu suscripción.</p><pre><span class="k">claude</span> --version</pre></div>
+    <div class="card"><h3>Límite disponible</h3><p>Cada ronda consume el límite de la suscripción. Max tarda y consume más: empieza con 2 o 3 niveles.</p><pre><span class="c"># empieza con poco</span>
+<span class="k">./medir.sh</span> carrinho -m opus -e low,medium</pre></div>
+  </div>
+</div></section>
+
+<section id="guia"><div class="wrap">
+  <span class="chip">Guía de uso · paso a paso</span>
+  <h2>Mide en 7 pasos</h2>
+  <p class="sub">Comandos reales del repositorio.</p>
+  <div class="step"><div class="b">1</div><div>
+    <h3>Descarga el kit</h3>
+    <p>Clónalo y ejecuta las pruebas (sin conexión).</p>
+<pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/esforco-medido.git</span>
+<span class="k">cd</span> esforco-medido
+<span class="k">python3</span> -m unittest discover tests   <span class="c"># 18 pruebas OK</span></pre>
+  </div></div>
+  <div class="step"><div class="b">2</div><div>
+    <h3>Haz una medición pequeña</h3>
+    <p>Dos rondas rápidas para ver cómo funciona.</p>
+<pre><span class="k">./medir.sh</span> carrinho -m opus -e low,medium</pre>
+  </div></div>
+  <div class="step"><div class="b">3</div><div>
+    <h3>Ejecuta el barrido completo</h3>
+    <p>Fable y Opus, low → max (10 rondas). Usa <code>-r 3</code> para repetir cada una antes de sacar conclusiones.</p>
+<pre><span class="k">./medir.sh</span> calendario                     <span class="c"># predeterminado: -m fable,opus -e low,medium,high,xhigh,max</span>
+<span class="k">./medir.sh</span> calendario -m fable -e low,high -r 3</pre>
+  </div></div>
+  <div class="step"><div class="b">4</div><div>
+    <h3>Lee el cuadro</h3>
+    <p>Puntuación oculta, herramientas, verificaciones, ediciones, tiempo, tokens y costo equivalente de cada ronda. ⚠ marca una ronda en la que Claude Code usó otro modelo.</p>
+<pre><span class="k">cat</span> resultados/calendario-*/RESULTADO.md</pre>
+  </div></div>
+  <div class="step"><div class="b">5</div><div>
+    <h3>Fija el nivel y, si se detiene antes, pega el bloque</h3>
+    <p>Elige el nivel más bajo que acierta. Si el modelo se detiene antes de terminar, pega el bloque de Anthropic en CLAUDE.md.</p>
+<pre><span class="c"># en Claude Code</span>
+/effort medium
+<span class="c"># bloque "terminar el trabajo"</span>
+<span class="k">printf</span> '\n# Terminar el trabajo\n' >> CLAUDE.md && <span class="k">cat</span> dicas/terminar-o-trabalho.pt.txt >> CLAUDE.md</pre>
+  </div></div>
+  <div class="step"><div class="b">6</div><div>
+    <h3>Mide una sesión tuya (opcional)</h3>
+    <p>Los mismos recuentos en una sesión ya grabada de Claude Code.</p>
+<pre><span class="k">python3</span> relatorio.py sessao ~/.claude/projects/&lt;projeto&gt;/&lt;sessao&gt;.jsonl</pre>
+  </div></div>
+  <div class="step"><div class="b">7</div><div>
+    <h3>Crea una tarea propia</h3>
+    <p><code>tarefas/&lt;nome&gt;/projeto/</code> (el código que recibe la IA), <code>pedido.txt</code> (el pedido) y <code>oculto/checar.py &lt;pasta&gt;</code>, que imprime <code>NOTA n/total</code>.</p>
+<pre><span class="k">./medir.sh</span> minha-tarefa -e low,high</pre>
+  </div></div>
+</div></section>
+
+<section id="exemplos"><div class="wrap">
+  <span class="chip">Precauciones</span>
+  <h2>Cómo evitar engañarte con los números</h2>
+  <div class="grid g2">
+    <div class="card"><h3>Una ronda no establece una regla</h3><p>Es la medida de esa tarea, ese día. Repítela con <code>-r 3</code> y usa una tarea parecida a tu trabajo.</p></div>
+    <div class="card"><h3>El costo es equivalente</h3><p>El costo en dólares del cuadro es el que Claude Code calcula según la tabla de la API. Con la suscripción pagas con tu límite.</p></div>
+    <div class="card"><h3>Aislado a propósito</h3><p>Sin el HOME temporal, tu CLAUDE.md y tus hooks se cargan en todas las rondas y cambian el comportamiento. <code>--sem-isolar</code> mide tu entorno real.</p></div>
+    <div class="card"><h3>macOS</h3><p>Ahí el inicio de sesión queda en Keychain: si el aislamiento no encuentra la credencial, el script avisa y se ejecuta sin aislar.</p></div>
+  </div>
+  <p class="note">Kit hermano: <a href="https://inematds.github.io/esforco-certo/guia/" target="_blank" rel="noopener">esfuerzo correcto</a> audita en qué modelo y nivel de esfuerzo se ejecuta cada parte de tu proyecto, y compara dos niveles en una tarea tuya.</p>
+</div></section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="pill">Bash</div><div class="pill">Python 3</div><div class="pill">Claude Code</div>
+    <p style="margin-top:18px">esfuerzo medido · kit gratis, MIT ·
+      <a href="https://github.com/inematds/esforco-medido">inematds/esforco-medido</a> ·
+      <a href="https://inema.club">INEMA.CLUB</a></p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var KEY='esforco-medido-theme';
+    var b=document.body, t=document.getElementById('themeToggle');
+    if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='☀️'; }
+    t.addEventListener('click',function(){
+      var light=b.classList.toggle('light');
+      t.textContent=light?'☀️':'🌙';
+      localStorage.setItem(KEY, light?'light':'dark');
+    });
+  })();
+</script>
+</body>
+</html>

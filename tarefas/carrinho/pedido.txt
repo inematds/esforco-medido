@@ -1,0 +1,1 @@
+Os clientes reclamam que o total do carrinho às vezes sai errado. As regras estão em REGRAS.md. Corrija o código. Há testes em tests/.

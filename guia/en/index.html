@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>effort measured — what effort really changes in Claude</title>
+<meta name="description" content="Free kit: measures what effort levels change in Claude Fable 5.2 and Opus 5.5 (tools, checks, time, accuracy) and includes 14 tips with sources.">
+<link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/esforco-medido/guia/">
+<link rel="alternate" hreflang="en" href="https://inematds.github.io/esforco-medido/guia/en/">
+<link rel="alternate" hreflang="es" href="https://inematds.github.io/esforco-medido/guia/es/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
+    --txt:#e9e9ee; --mut:#9a9aa6; --amb:#E2A23B; --amb2:#f0c070; --sky:#38bdf8; --pro:#cbd5e1;
+    color-scheme:dark;
+  }
+  body.light{
+    --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea;
+    --txt:#1a1a22; --mut:#5b5b68; --amb:#b9791d; --amb2:#a16207; --sky:#0369a1; --pro:#b45309;
+    color-scheme:light;
+  }
+  body.light .hero .glow{opacity:.5}
+  body.light pre{background:#0e0e14;color:#d6d6e0}
+  body.light pre .c{color:#8a8a98}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Sora,sans-serif;line-height:1.15;margin:0}
+  a{color:var(--amb);text-decoration:none}
+  code,pre{font-family:"JetBrains Mono",monospace}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  .mut{color:var(--mut)} .amb{color:var(--amb)}
+  .chip{display:inline-block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amb);font-weight:600;font-family:Sora}
+  nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(12,12,16,.78);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:22px;height:60px}
+  nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
+  nav .brand .emoji{font-size:1.25rem}
+  nav .sep{color:var(--mut);opacity:.45}
+  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .inema:hover{filter:brightness(1.15)}
+  nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .pro:hover{filter:brightness(1.15)}
+  nav .clubpro{display:inline-flex;align-items:center;gap:6px}
+  nav .links{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:.92rem}
+  nav .links a.sec{color:var(--mut)} nav .links a.sec:hover{color:var(--txt)}
+  .lang{display:inline-flex;gap:2px;font-family:Sora;font-size:.78rem}
+  .lang a{color:var(--mut);padding:.2em .45em;border-radius:6px} .lang a.on{color:var(--amb);background:rgba(226,162,59,.12)}
+  .tgl{background:var(--bg2);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
+  .tgl:hover{border-color:var(--amb)}
+  .btn{display:inline-block;background:var(--amb);color:#1a1206;font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  @media(max-width:760px){nav .links a.sec{display:none}}
+  @media(max-width:520px){nav .wrap{gap:8px;padding:8px 14px;height:auto;flex-wrap:wrap} nav .links{gap:8px;margin-left:0;width:100%;justify-content:space-between} nav .btn{padding:.45em .7em;font-size:.82rem} .tgl{width:34px;height:34px}}
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero .glow{position:absolute;inset:-40% -20% auto auto;width:70%;height:600px;background:radial-gradient(closest-side,rgba(226,162,59,.22),transparent 70%);pointer-events:none}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:74px 22px}
+  .hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.025em}
+  .hero p.lead{font-size:1.18rem;color:var(--mut);margin:1.1em 0 1.6em;max-width:34ch}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .hero figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
+  .hero figure img{width:100%;height:auto;display:block}
+  .resumo{padding:38px 0 34px;border-bottom:1px solid var(--line)}
+  .resumo p{font-size:1.12rem;line-height:1.7;max-width:74ch;margin:.55em 0 0}
+  @media(max-width:780px){.hero .wrap{grid-template-columns:1fr;padding:48px 22px}}
+  section{padding:62px 0;border-bottom:1px solid var(--line)}
+  section h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;letter-spacing:-.02em}
+  section .sub{color:var(--mut);margin:.6em 0 2em;max-width:62ch}
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.g3,.g4{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h3{font-size:1.05rem;margin-bottom:.4em}
+  .card p{color:var(--mut);font-size:.92rem;margin:0}
+  .num{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:8px;background:rgba(226,162,59,.14);color:var(--amb);font-family:Sora;font-weight:800;font-size:.9rem;margin-bottom:.7em}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+  .flow span{background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:.45em .9em;font-size:.85rem;font-family:Sora;font-weight:600}
+  .flow .arr{color:var(--amb);border:none;background:none;padding:0 .1em}
+  pre{background:#0a0a0e;border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow:auto;font-size:.86rem;line-height:1.6;color:#d6d6e0}
+  pre .c{color:#6f6f7c} pre .k{color:var(--amb2)} pre .s{color:#9ece6a}
+  .step{display:grid;grid-template-columns:46px minmax(0,1fr);gap:16px;margin-bottom:26px}
+  .step>div,.card{min-width:0}
+  p code,li code,td code{overflow-wrap:anywhere}
+  .step .b{width:46px;height:46px;border-radius:12px;background:var(--amb);color:#1a1206;font-family:Sora;font-weight:800;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:1.12rem;margin-bottom:.3em}
+  .step p{color:var(--mut);margin:.2em 0 .7em}
+  .ex{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:680px){.ex{grid-template-columns:1fr}}
+  .ex figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+  .ex figure img{width:100%;height:auto;display:block}
+  .ex figcaption{padding:12px 14px;font-size:.88rem;color:var(--mut);background:var(--card)}
+  .phase{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .phase:last-child{border:none}
+  .phase .tag{flex:0 0 92px;font-family:Sora;font-weight:800;color:var(--amb)}
+  .phase .d strong{display:block;margin-bottom:.2em}
+  .phase .d span{color:var(--mut);font-size:.92rem}
+  footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:0 4px}
+  .techhead{background:var(--bg2);border-top:3px solid var(--amb);padding:58px 0 8px}
+  .techhead h2{font-family:Sora;margin:.3em 0 0}
+  .techzone{background:var(--bg2)}
+  .tw{overflow-x:auto;border:1px solid var(--line);border-radius:14px}
+  table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:560px}
+  th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left}
+  th{font-family:Sora;font-size:.8rem;color:var(--amb);background:var(--card)}
+  tr:last-child td{border-bottom:none}
+  .note{font-size:.85rem;color:var(--mut);margin-top:12px}
+  .big{font:800 clamp(2rem,6vw,3.2rem) Sora,sans-serif;color:var(--amb)}
+  .dica{border-left:3px solid var(--amb);padding:4px 0 4px 14px;margin:0 0 14px}
+  .dica b{font-family:Sora} .dica span{color:var(--mut);display:block;font-size:.92rem}
+  table.fit{min-width:0}
+  .hint{display:none;font-size:.78rem;color:var(--mut);margin:6px 0 0}
+  @media(max-width:600px){.opt{display:none} .hint{display:block} th,td{padding:8px 8px}}
+  .fonte{font-size:.72rem;color:var(--mut);font-family:"JetBrains Mono",monospace}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="brand" href="#top"><span class="emoji">🎚️</span> effort measured</a>
+  <span class="sep">|</span>
+  <span class="clubpro">
+    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <span class="sep">-</span>
+    <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
+  </span>
+  <div class="links">
+    <a class="sec" href="#mito">Effort ≠ time</a>
+    <a class="sec" href="#modelos">Fable × Opus</a>
+    <a class="sec" href="#medido">What I measured</a>
+    <a class="sec" href="#dicas">Tips</a>
+    <a class="sec" href="#tecnico">Kit (technical)</a>
+    <span class="lang"><a href="../">PT</a><a class="on" href="./">EN</a><a href="../es/">ES</a></span>
+    <button class="tgl" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">🌙</button>
+    <a class="btn" href="https://github.com/inematds/esforco-medido" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div>
+      <span class="chip">Claude Fable 5.2 · Claude Opus 5.5</span>
+      <h1>You raise the effort and pay more. <span class="amb">Effort measured</span> shows what changes.</h1>
+      <p class="lead">I measured 30 runs: across all 3 tasks, minimum effort got everything right, just like maximum effort, which cost about 14× more. Effort changes how much the AI thinks and checks, and one model’s “high” isn’t the same as another’s.</p>
+      <div class="cta">
+        <a class="btn" href="#mito">Understand it in 5 minutes</a>
+        <a class="btn ghost" href="https://github.com/inematds/esforco-medido" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </div>
+    <figure><img src="../assets/banner-en.jpg" alt="Effort measured banner: effort button and measurement dashboard"></figure>
+  </div>
+</header>
+
+<section id="resumo" class="resumo"><div class="wrap">
+  <span class="chip">In short</span>
+  <p>Claude users choose an effort level (from <em>low</em> to <em>max</em>) thinking that more effort means the AI works longer and gets more right. That’s not quite how it works. Effort changes how much the model thinks and how many times it acts and checks its own work; time and cost follow from that. This free kit shows it with numbers: run the same task at every level in Fable 5.2 and Opus 5.5, count what the model did, and score the result with a checker it can’t see. It also includes 14 sourced tips. No setup is needed to read it; to measure, you need Python 3 and Claude Code.</p>
+  <figure style="margin:26px 0 0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000"><img src="../assets/banner-grade-en.jpg" alt="What the kit delivers: same task at 5 levels, hidden checker, tool and check counts, Fable 5.2 × Opus 5.5, 14 tips" loading="lazy" style="width:100%;display:block"></figure>
+</div></section>
+
+<!--VIDEO-->
+
+<section id="mito"><div class="wrap">
+  <span class="chip">What effort is</span>
+  <h2>Effort isn’t a timer. <span class="amb">It’s how much the AI thinks and acts.</span></h2>
+  <p class="sub">Anthropic’s documentation says the level “changes how the model thinks and how many tool calls it makes.” A tool call is each time the AI opens a file, edits it, runs a test, or searches. The time a task takes is a consequence, not the setting.</p>
+  <div class="grid g3">
+    <div class="card"><div class="num">1</div><h3>Thinks more before acting</h3><p>At a high level, the reasoning behind each step goes deeper. In Fable 5.2, starting at <em>high</em>, it even thinks before replying “hi.”</p></div>
+    <div class="card"><div class="num">2</div><h3>Acts and checks more</h3><p>More tool calls: opens more files, runs more tests, checks what it did. At a low level, it combines steps and checks less.</p></div>
+    <div class="card"><div class="num">3</div><h3>Stops less often midway</h3><p>At low levels, the model tends to stop early, listing what’s left or offering to continue. Then <strong>you</strong> come back and ask for the rest.</p></div>
+  </div>
+  <p class="note">What effort barely changes: response length. For a short or long answer, say so in your prompt. Source: Anthropic API migration guide (Fable 5.2 and Opus 5.5), read on 11/12/2026.</p>
+</div></section>
+
+<section id="modelos"><div class="wrap">
+  <span class="chip">Fable 5.2 × Opus 5.5</span>
+  <h2>The same name <span class="amb">doesn’t mean the same thing</span> in both models</h2>
+  <p class="sub">The five levels follow the same order, but the reasoning behind each one varies by model. Comparing “Fable high” with “Opus high” as if they were equal is misleading.</p>
+  <div class="tw"><table class="fit">
+    <tr><th></th><th>Claude Fable 5.2</th><th>Claude Opus 5.5</th></tr>
+    <tr><td>API default (when no one specifies a level)</td><td><b>high</b></td><td><b>medium</b></td></tr>
+    <tr><td>Where to start, according to Anthropic</td><td>high (where most of the gains happen)</td><td>medium, and test the levels above and below</td></tr>
+    <tr><td>What’s surprising</td><td><em>low</em> came close to Fable 5.1 at higher levels</td><td><em>medium</em> beat Opus 5’s <em>high</em>; <em>low</em> came close in coding</td></tr>
+    <tr><td>xhigh and max</td><td>xhigh: slightly higher scores, many more tokens; max: the ceiling, rarely needed</td><td>only where you’ve measured gains; at xhigh/max, it thinks more per turn than Opus 5</td></tr>
+    <tr><td>Common pitfall</td><td>“think less” in the prompt doesn’t work at medium or above: lower the level</td><td>if you copied the Opus 5 level, you’re running a different level than you think</td></tr>
+    <tr><td>API price (per million tokens, input/output)</td><td>US$ 8 / US$ 40</td><td>US$ 4 / US$ 20</td></tr>
+  </table></div>
+  <p class="note">In Claude Code, check the session level with <code>/effort status</code> and change it with <code>/effort &lt;nível&gt;</code>; the new level takes effect with the next message. <em>Ultracode</em> isn’t a level: it’s a setting that assembles a team of agents using the session’s current effort level.</p>
+</div></section>
+
+<section id="medido"><div class="wrap">
+  <span class="chip">What I measured</span>
+  <h2>Across 3 short tasks, <span class="amb">minimum effort scored the same as maximum</span></h2>
+  <p class="sub">3 coding tasks (easy, bug hunt, and a calendar with moving holidays), each at 5 levels in both models: 30 runs, clean copy, hidden checker. Measured on 11/12/2026, one run per combination.</p>
+  <div class="grid g3" style="margin-bottom:26px">
+    <div class="card"><div class="big">30 out of 30</div><p>runs with a <strong>perfect score</strong>: from <em>low</em> to <em>max</em>, in both models, all got everything right.</p></div>
+    <div class="card"><div class="big">~14×</div><p>the cost of Fable 5.2 at <em>max</em> compared with <em>low</em> (US$ 9.78 × US$ 0.72), and about 25× the time (26 min × 1 min).</p></div>
+    <div class="card"><div class="big">130×</div><p>more thinking in Fable <em>max</em> than <em>low</em> (132 thousand × 1 thousand tokens). That’s what effort buys.</p></div>
+  </div>
+  <div class="tw"><table>
+    <tr><th>Total across 3 tasks</th><th>Score</th><th>Time</th><th>Thinking (tokens)</th><th class="opt">Tools</th><th>Checks</th><th>Equivalent cost*</th></tr>
+    <tr><td>Fable 5.2 · low</td><td>48/48</td><td>1 min 05 s</td><td>1.015</td><td class="opt">16</td><td>3</td><td>US$ 0.72</td></tr>
+    <tr><td>Fable 5.2 · medium</td><td>48/48</td><td>1 min 26 s</td><td>1.646</td><td class="opt">12</td><td>4</td><td>US$ 0.83</td></tr>
+    <tr><td>Fable 5.2 · high</td><td>48/48</td><td>1 min 53 s</td><td>3.174</td><td class="opt">23</td><td>7</td><td>US$ 1.05</td></tr>
+    <tr><td>Fable 5.2 · xhigh</td><td>48/48</td><td>5 min 03 s</td><td>18.580</td><td class="opt">33</td><td>10</td><td>US$ 2.21</td></tr>
+    <tr><td>Fable 5.2 · max</td><td>48/48</td><td>26 min 42 s</td><td>132.112</td><td class="opt">56</td><td>25</td><td>US$ 9.78</td></tr>
+    <tr><td>Opus 5.5 · low</td><td>48/48</td><td>1 min 04 s</td><td>253</td><td class="opt">11</td><td>5</td><td>US$ 0.30</td></tr>
+    <tr><td>Opus 5.5 · medium</td><td>48/48</td><td>1 min 29 s</td><td>760</td><td class="opt">13</td><td>4</td><td>US$ 0.39</td></tr>
+    <tr><td>Opus 5.5 · high</td><td>48/48</td><td>1 min 58 s</td><td>2.036</td><td class="opt">12</td><td>4</td><td>US$ 0.48</td></tr>
+    <tr><td>Opus 5.5 · xhigh</td><td>48/48</td><td>3 min 35 s</td><td>7.472</td><td class="opt">26</td><td>10</td><td>US$ 0.79</td></tr>
+    <tr><td>Opus 5.5 · max</td><td>48/48</td><td>18 min 06 s</td><td>92.889</td><td class="opt">48</td><td>16</td><td>US$ 3.77</td></tr>
+  </table></div>
+  <div class="grid g2" style="margin-top:22px">
+    <div class="card"><h3>What increased with effort</h3><p>Thinking increased at every step in both models. Checks (running code to verify) grew a little from <em>low</em> to <em>high</em> (Fable 3 → 7, Opus 5 → 4) and jumped at <em>xhigh</em> and <em>max</em> (Fable 25, Opus 16): at those levels, the model writes test scripts, looks for edge cases, and checks again.</p></div>
+    <div class="card"><h3>What didn’t change</h3><p>The score. These short, clearly described tasks were already solved at the lowest level. Opus 5.5 at <em>low</em> got everything right at the lowest cost (US$ 0.30), about 32× less than Fable 5.2 at <em>max</em>.</p></div>
+  </div>
+  <p class="hint">swipe the table sideways →</p>
+  <p class="note">* Cost calculated by Claude Code from the API price table (summed before rounding); with a subscription, you pay from your usage limit, so ~14× and ~32× are equivalent cost ratios, not changes to your limit. Thinking = reasoning tokens counted in each run’s log (the number in parentheses in RESULTADO.md). <strong>Read carefully:</strong> these are short tasks, one run each. They don’t show where high effort helps: according to Anthropic, at low effort, long tasks tend to stop before they’re finished, and open-ended, difficult problems benefit from more effort. None of these runs stopped early or called a subagent. Full records: <a href="https://github.com/inematds/esforco-medido/tree/main/exemplos" target="_blank" rel="noopener">exemplos/</a>.</p>
+  <p class="note"><strong>Repetition (noise):</strong> Fable 5.2 on the <em>carrinho</em> (shopping cart) task, <em>low</em> and <em>high</em> three times each → all 12/12; <em>low</em> 26–33 s, <em>high</em> 39–49 s, and <em>high</em> always thought longer. The number of tools varied from 3 to 12 across identical runs: compare reasoning and time, not an isolated tool count.</p>
+</div></section>
+
+<section id="dicas"><div class="wrap">
+  <span class="chip">14 tips</span>
+  <h2>How to choose an effort level <span class="amb">without wasting money</span></h2>
+  <p class="sub">Every tip includes its source. The full list, with details, is in <a href="https://github.com/inematds/esforco-medido/blob/main/dicas/DICAS.md" target="_blank" rel="noopener">dicas/DICAS.md</a> (in Portuguese).</p>
+  <div class="grid g2">
+    <div>
+      <div class="dica"><b>1. Effort isn’t a timer.</b><span>It changes how much the model thinks and acts; time is a consequence.</span></div>
+      <div class="dica"><b>2. Same name, different amount.</b><span>Don’t compare “high” across models: measure.</span></div>
+      <div class="dica"><b>3. The prompt controls answer length.</b><span>Effort barely changes it.</span></div>
+      <div class="dica"><b>4. The defaults differ.</b><span>API: Fable at high, Opus at medium. In Claude Code: <code>/effort status</code>.</span></div>
+      <div class="dica"><b>5. Fable 5.2: start at high.</b><span>Move down to medium for everyday work and low for quick tasks and subagents.</span></div>
+      <div class="dica"><b>6. Opus 5.5: start at medium.</b><span>In several coding tests, low came close at a much lower cost.</span></div>
+      <div class="dica"><b>7. Use xhigh only where you’ve measured a gain.</b><span>Max is for measuring the ceiling or for the rare task where time doesn’t matter.</span></div>
+    </div>
+    <div>
+      <div class="dica"><b>8. Use low effort to finish sooner.</b><span>Paste the “finish the work” block into CLAUDE.md (it’s in the kit).</span></div>
+      <div class="dica"><b>9. “Think less” doesn’t work in Fable 5.2.</b><span>Lower the level instead of asking.</span></div>
+      <div class="dica"><b>10. At high+, Fable even thinks before saying “hi.”</b><span>Easy turns call for a low level.</span></div>
+      <div class="dica"><b>11. At xhigh/max, Fable may call subagents.</b><span>A subagent is another copy of the AI that it opens for part of the work, and each one uses resources. Anthropic says it does this to review its own work; it didn’t do so in the short runs here.</span></div>
+      <div class="dica"><b>12. Ultracode isn’t a level.</b><span>It’s a team of agents; <code>--effort ultracode</code> turns it on and sets effort to xhigh.</span></div>
+      <div class="dica"><b>13. Mix levels in the same task.</b><span>Plan at medium, then move up for the long part that runs on its own.</span></div>
+      <div class="dica"><b>14. Measure on your own task.</b><span>Choose the lowest level that gets it right (<a href="#guia">how to use it ↓</a>).</span></div>
+    </div>
+  </div>
+</div></section>
+
+<div id="tecnico" class="techhead"><div class="wrap">
+  <span class="chip">Technical section</span>
+  <h2>The kit: <span class="amb">for measuring your own task</span></h2>
+  <p class="sub">The technical section starts here: install, run the measurement tool, and create your own task. You <strong>don’t need</strong> this part to understand what came before.</p>
+</div></div>
+
+<div class="techzone">
+<section id="oque"><div class="wrap">
+  <span class="chip">What it is</span>
+  <h2>An effort meter <span class="amb">the AI can’t game</span></h2>
+  <p class="sub">Three parts: the meter, the run reader, and tasks with a hidden checker.</p>
+  <div class="grid g3">
+    <div class="card"><h3>🎚️ medir.sh</h3><p>Runs the task for each model × effort level, each run in a clean copy and a temporary HOME: the model can’t read your CLAUDE.md, hooks, plugins, skills, or MCP. Uses your subscription (removes ANTHROPIC_API_KEY from the environment).</p></div>
+    <div class="card"><h3>🔎 relatorio.py</h3><p>Reads each run’s log and counts tools by type, checks (code run to verify), edits, rereads, subagents, thinking tokens, time, equivalent cost, and whether the ending offers to continue.</p></div>
+    <div class="card"><h3>🧪 tarefas/</h3><p>3 tasks with a hidden checker: <code>intervalos</code> (easy), <code>carrinho</code> (6 hidden bugs), and <code>calendario</code> (5 functions with moving holidays). The AI sees only a few tests; the score comes from many.</p></div>
+  </div>
+</div></section>
+
+<section id="fluxo"><div class="wrap">
+  <span class="chip">How it works</span>
+  <h2>One run, from start to finish</h2>
+  <p class="sub">Each row in the final table is one run like this.</p>
+  <div class="flow">
+    <span>clean copy of the task</span><span class="arr">→</span>
+    <span>temporary HOME</span><span class="arr">→</span>
+    <span>claude -p --model --effort</span><span class="arr">→</span>
+    <span>stream-json log</span><span class="arr">→</span>
+    <span>hidden checker</span><span class="arr">→</span>
+    <span>RESULTADO.md</span>
+  </div>
+</div></section>
+
+<section id="pre"><div class="wrap">
+  <span class="chip">Requirements</span>
+  <h2>What you need</h2>
+  <p class="sub">No API: everything runs through your subscription.</p>
+  <div class="grid g3">
+    <div class="card"><h3>Python 3</h3><p>Standard library only.</p><pre><span class="k">python3</span> --version</pre></div>
+    <div class="card"><h3>Claude Code, logged in</h3><p>With Fable 5.2 and Opus 5.5 available on your subscription.</p><pre><span class="k">claude</span> --version</pre></div>
+    <div class="card"><h3>Available usage</h3><p>Each run uses your subscription limit. Max takes longer and uses more: start with 2 or 3 levels.</p><pre><span class="c"># start small</span>
+<span class="k">./medir.sh</span> carrinho -m opus -e low,medium</pre></div>
+  </div>
+</div></section>
+
+<section id="guia"><div class="wrap">
+  <span class="chip">Step-by-step guide</span>
+  <h2>Measure in 7 steps</h2>
+  <p class="sub">Actual commands from the repository.</p>
+  <div class="step"><div class="b">1</div><div>
+    <h3>Download the kit</h3>
+    <p>Clone it and run the tests (no network required).</p>
+<pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/esforco-medido.git</span>
+<span class="k">cd</span> esforco-medido
+<span class="k">python3</span> -m unittest discover tests   <span class="c"># 18 testes OK</span></pre>
+  </div></div>
+  <div class="step"><div class="b">2</div><div>
+    <h3>Run a small measurement</h3>
+    <p>Two quick runs to see it work.</p>
+<pre><span class="k">./medir.sh</span> carrinho -m opus -e low,medium</pre>
+  </div></div>
+  <div class="step"><div class="b">3</div><div>
+    <h3>Run the full sweep</h3>
+    <p>Fable and Opus, low → max (10 runs). Use <code>-r 3</code> to repeat each one before drawing a conclusion.</p>
+<pre><span class="k">./medir.sh</span> calendario                     <span class="c"># padrão: -m fable,opus -e low,medium,high,xhigh,max</span>
+<span class="k">./medir.sh</span> calendario -m fable -e low,high -r 3</pre>
+  </div></div>
+  <div class="step"><div class="b">4</div><div>
+    <h3>Read the results</h3>
+    <p>Hidden score, tools, checks, edits, time, tokens, and equivalent cost for each run. ⚠ marks a run where Claude Code used a different model.</p>
+<pre><span class="k">cat</span> resultados/calendario-*/RESULTADO.md</pre>
+  </div></div>
+  <div class="step"><div class="b">5</div><div>
+    <h3>Set the level and, if it stops early, paste the block</h3>
+    <p>Choose the lowest level that gets it right. If the model stops before finishing, paste Anthropic’s block into CLAUDE.md.</p>
+<pre><span class="c"># in Claude Code</span>
+/effort medium
+<span class="c"># bloco "terminar o trabalho"</span>
+<span class="k">printf</span> '\n# Terminar o trabalho\n' >> CLAUDE.md && <span class="k">cat</span> dicas/terminar-o-trabalho.pt.txt >> CLAUDE.md</pre>
+  </div></div>
+  <div class="step"><div class="b">6</div><div>
+    <h3>Measure one of your sessions (optional)</h3>
+    <p>The same counts from a Claude Code session that’s already been recorded.</p>
+<pre><span class="k">python3</span> relatorio.py sessao ~/.claude/projects/&lt;projeto&gt;/&lt;sessao&gt;.jsonl</pre>
+  </div></div>
+  <div class="step"><div class="b">7</div><div>
+    <h3>Create your own task</h3>
+    <p><code>tarefas/&lt;nome&gt;/projeto/</code> (the code the AI receives), <code>pedido.txt</code> (the prompt), and <code>oculto/checar.py &lt;pasta&gt;</code>, which prints <code>NOTA n/total</code>.</p>
+<pre><span class="k">./medir.sh</span> minha-tarefa -e low,high</pre>
+  </div></div>
+</div></section>
+
+<section id="exemplos"><div class="wrap">
+  <span class="chip">Caveats</span>
+  <h2>How to avoid misreading the numbers</h2>
+  <div class="grid g2">
+    <div class="card"><h3>One run isn’t a rule</h3><p>It measures that task on that day. Repeat with <code>-r 3</code> and use a task similar to your work.</p></div>
+    <div class="card"><h3>Cost is an equivalent</h3><p>The dollar amount in the table is what Claude Code calculates from the API price table. With a subscription, you pay from your usage limit.</p></div>
+    <div class="card"><h3>Isolated by design</h3><p>Without the temporary HOME, your CLAUDE.md and hooks are loaded in every run and change the behavior. <code>--sem-isolar</code> measures your actual environment.</p></div>
+    <div class="card"><h3>macOS</h3><p>Login is stored in Keychain there: if the isolated run can’t find the credential, the script warns you and runs without isolation.</p></div>
+  </div>
+  <p class="note">Related kit: <a href="https://inematds.github.io/esforco-certo/guia/" target="_blank" rel="noopener">effort right</a> audits which model and effort level each part of your project uses and compares two levels on one of your tasks.</p>
+</div></section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="pill">Bash</div><div class="pill">Python 3</div><div class="pill">Claude Code</div>
+    <p style="margin-top:18px">effort measured · free kit, MIT ·
+      <a href="https://github.com/inematds/esforco-medido">inematds/esforco-medido</a> ·
+      <a href="https://inema.club">INEMA.CLUB</a></p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var KEY='esforco-medido-theme';
+    var b=document.body, t=document.getElementById('themeToggle');
+    if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='☀️'; }
+    t.addEventListener('click',function(){
+      var light=b.classList.toggle('light');
+      t.textContent=light?'☀️':'🌙';
+      localStorage.setItem(KEY, light?'light':'dark');
+    });
+  })();
+</script>
+</body>
+</html>

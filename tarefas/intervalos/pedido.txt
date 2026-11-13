@@ -1,0 +1,1 @@
+Implemente a função juntar em intervalos.py seguindo a docstring do arquivo. Há testes em tests/.
