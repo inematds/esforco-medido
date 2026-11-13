@@ -5,7 +5,7 @@
 #
 # Uso:
 #   ./medir.sh <tarefa> [-m modelos] [-e esforços] [-r repetições] [--sem-isolar] [--teto SEG]
-#   <tarefa> = nome em tarefas/ (intervalos, carrinho) ou uma pasta com projeto/, pedido.txt e oculto/checar.py
+#   <tarefa> = nome em tarefas/ (intervalos, carrinho, calendario) ou uma pasta com projeto/, pedido.txt e oculto/checar.py
 # Exemplos:
 #   ./medir.sh carrinho                              # fable e opus, low → max (10 rodadas)
 #   ./medir.sh carrinho -m fable -e low,high -r 3    # 6 rodadas

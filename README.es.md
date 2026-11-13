@@ -29,7 +29,7 @@ El esfuerzo no es un cronómetro. Según la documentación de Anthropic, control
 | Opus 5.5 · medium | 48/48 | 1 min 29 s | 760 | 4 | US$ 0,39 |
 | Opus 5.5 · max | 48/48 | 18 min 06 s | 92.889 | 16 | US$ 3,77 |
 
-El pensamiento aumentó en cada nivel; las revisiones crecieron poco hasta `high` (Fable 3 → 7, Opus 5 → 4) y se dispararon en `xhigh` y `max` (Fable 25, Opus 16). Son tareas cortas: no muestran dónde ayuda un esfuerzo alto (trabajo largo, problema abierto). Los cuadros completos, con los 5 niveles, están en `exemplos/`.
+El pensamiento aumentó en cada nivel; las revisiones crecieron poco hasta `high` (Fable 3 → 7; en Opus se mantuvieron, 5 → 4) y se dispararon en `xhigh` y `max` (Fable 25, Opus 16). Son tareas cortas: no muestran dónde ayuda un esfuerzo alto (trabajo largo, problema abierto). Los cuadros completos, con los 5 niveles, están en `exemplos/`.
 
 Repetición (ruido): Fable 5.2 en la tarea `carrinho` (carrito), `low` y `high` 3 veces cada uno → todas 12/12; `low` 26–33 s, `high` 39–49 s, y el `high` siempre pensó más. En cambio, el número de herramientas varió de 3 a 12 entre rondas iguales: compara el razonamiento y el tiempo, no un recuento aislado de herramientas (`exemplos/carrinho-repeticao/`).
 
@@ -53,7 +53,7 @@ cat dicas/DICAS.md                               # los 14 consejos
 | `relatorio.py` | Lee el stream-json de cada ronda y cuenta herramientas (por tipo), revisiones (código ejecutado para comprobar, incluida la suite), ediciones, relecturas después de editar, subagentes, errores, tokens de pensamiento, tiempo, costo equivalente y si al final propone continuar en vez de terminar. `sessao <arquivo.jsonl>` hace los mismos conteos en una sesión tuya. |
 | `tarefas/` | 3 tareas con verificador oculto (`oculto/checar.py`, puntuación `n/total`): `intervalos` (fácil, 16 casos), `carrinho` (buscar 6 errores según las reglas de un archivo, 12 casos), `calendario` (5 funciones con feriados móviles, 20 casos). |
 | `dicas/DICAS.md` | 14 consejos sobre esfuerzo para Fable 5.2 y Opus 5.5, con la fuente de cada uno (en portugués). |
-| `dicas/terminar-o-trabalho.pt.txt` | El bloque «terminar el trabajo» de Anthropic, para pegar en CLAUDE.md cuando el modelo se detenga antes de tiempo (en portugués; el original está en `.en.txt`). |
+| `dicas/terminar-o-trabalho.es.txt` | El bloque «terminar el trabajo» de Anthropic, para pegar en CLAUDE.md cuando el modelo se detenga antes de tiempo (en portugués; el original está en `.en.txt`). |
 | `exemplos/` | Las rondas reales de este kit (12/11/2026): `RESULTADO.md` y `resultado.json` de cada tarea. |
 | `tests/` | 18 pruebas sin red: `python3 -m unittest discover tests`. |
 
@@ -70,7 +70,7 @@ Crea `tarefas/<nome>/` con `projeto/` (el código que recibe el modelo), `pedido
 | 3 | Medir los niveles | `./medir.sh <tarefa> [-m …] [-e …] [-r 3]` | ⚙️ script + 🤖 `claude -p` |
 | 4 | Leer el cuadro | `resultados/<tarefa>-<data>/RESULTADO.md` | 🧠 tú |
 | 5 | Fijar el nivel | `/effort <nível>` o `effortLevel` / `modelSettings` en settings | 🧠 tú |
-| 6 | Si se detiene pronto | pegar `dicas/terminar-o-trabalho.pt.txt` en CLAUDE.md | 🧠 tú |
+| 6 | Si se detiene pronto | pegar `dicas/terminar-o-trabalho.es.txt` en CLAUDE.md | 🧠 tú |
 
 ## Precauciones
 

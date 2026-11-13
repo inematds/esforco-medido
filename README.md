@@ -37,7 +37,7 @@ combinação. **Todas as 30 tiraram nota máxima.** O que mudou foi o resto (som
 | Opus 5.5 · medium | 48/48 | 1 min 29 s | 760 | 4 | US$ 0,39 |
 | Opus 5.5 · max | 48/48 | 18 min 06 s | 92.889 | 16 | US$ 3,77 |
 
-O pensamento subiu em todo degrau; as conferências cresceram pouco até o `high` (Fable 3 → 7, Opus 5 → 4) e saltaram
+O pensamento subiu em todo degrau; as conferências cresceram pouco até o `high` (Fable 3 → 7; no Opus ficaram iguais, 5 → 4) e saltaram
 no `xhigh` e no `max` (Fable 25, Opus 16). São tarefas curtas: elas não mostram onde o esforço alto ajuda (trabalho longo, problema aberto). Os quadros
 completos, com os 5 níveis, estão em `exemplos/`.
 
@@ -65,7 +65,7 @@ cat dicas/DICAS.md                               # as 14 dicas
 | `relatorio.py` | Lê o stream-json de cada rodada e conta ferramentas (por tipo), conferências (código rodado para checar, inclusive a suíte), edições, releituras depois de editar, subagentes, erros, tokens de pensamento, tempo, custo equivalente e se o fim oferece continuar em vez de terminar. `sessao <arquivo.jsonl>` faz as mesmas contagens numa sessão sua. |
 | `tarefas/` | 3 tarefas com checador oculto (`oculto/checar.py`, nota `n/total`): `intervalos` (fácil, 16 casos), `carrinho` (caça a 6 erros com as regras num arquivo, 12 casos), `calendario` (5 funções com feriados móveis, 20 casos). |
 | `dicas/DICAS.md` | 14 dicas de esforço para Fable 5.2 e Opus 5.5, com a fonte de cada uma. |
-| `dicas/terminar-o-trabalho.pt.txt` | O bloco "terminar o trabalho" da Anthropic, para colar no CLAUDE.md quando o modelo parar antes da hora (original em `.en.txt`). |
+| `dicas/terminar-o-trabalho.pt.txt` | O bloco "terminar o trabalho" da Anthropic, para colar no CLAUDE.md quando o modelo parar antes da hora (original em `.en.txt`, versão em espanhol em `.es.txt`). |
 | `exemplos/` | As rodadas reais deste kit (12/11/2026): `RESULTADO.md` e `resultado.json` de cada tarefa. |
 | `tests/` | 18 testes sem rede: `python3 -m unittest discover tests`. |
 

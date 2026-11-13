@@ -145,7 +145,7 @@
     <div>
       <span class="chip">Claude Fable 5.2 · Claude Opus 5.5</span>
       <h1>You raise the effort and pay more. <span class="amb">Effort measured</span> shows what changes.</h1>
-      <p class="lead">I measured 30 runs: across all 3 tasks, minimum effort got everything right, just like maximum effort, which cost about 14× more. Effort changes how much the AI thinks and checks, and one model’s “high” isn’t the same as another’s.</p>
+      <p class="lead">I measured 30 runs: across all 3 tasks, minimum effort got everything right, just like maximum effort, which on Fable cost about 14× more. Effort changes how much the AI thinks and checks, and one model’s “high” isn’t the same as another’s.</p>
       <div class="cta">
         <a class="btn" href="#mito">Understand it in 5 minutes</a>
         <a class="btn ghost" href="https://github.com/inematds/esforco-medido" target="_blank" rel="noopener">View on GitHub</a>
@@ -188,7 +188,7 @@
     <tr><td>Common pitfall</td><td>“think less” in the prompt doesn’t work at medium or above: lower the level</td><td>if you copied the Opus 5 level, you’re running a different level than you think</td></tr>
     <tr><td>API price (per million tokens, input/output)</td><td>US$ 8 / US$ 40</td><td>US$ 4 / US$ 20</td></tr>
   </table></div>
-  <p class="note">In Claude Code, check the session level with <code>/effort status</code> and change it with <code>/effort &lt;nível&gt;</code>; the new level takes effect with the next message. <em>Ultracode</em> isn’t a level: it’s a setting that assembles a team of agents using the session’s current effort level.</p>
+  <p class="note">In Claude Code, check the session level with <code>/effort status</code> and change it with <code>/effort &lt;level&gt;</code>; the new level takes effect with the next message. <em>Ultracode</em> isn’t a level: it’s a setting that assembles a team of agents using the session’s current effort level.</p>
 </div></section>
 
 <section id="medido"><div class="wrap">
@@ -202,24 +202,24 @@
   </div>
   <div class="tw"><table>
     <tr><th>Total across 3 tasks</th><th>Score</th><th>Time</th><th>Thinking (tokens)</th><th class="opt">Tools</th><th>Checks</th><th>Equivalent cost*</th></tr>
-    <tr><td>Fable 5.2 · low</td><td>48/48</td><td>1 min 05 s</td><td>1.015</td><td class="opt">16</td><td>3</td><td>US$ 0.72</td></tr>
-    <tr><td>Fable 5.2 · medium</td><td>48/48</td><td>1 min 26 s</td><td>1.646</td><td class="opt">12</td><td>4</td><td>US$ 0.83</td></tr>
-    <tr><td>Fable 5.2 · high</td><td>48/48</td><td>1 min 53 s</td><td>3.174</td><td class="opt">23</td><td>7</td><td>US$ 1.05</td></tr>
-    <tr><td>Fable 5.2 · xhigh</td><td>48/48</td><td>5 min 03 s</td><td>18.580</td><td class="opt">33</td><td>10</td><td>US$ 2.21</td></tr>
-    <tr><td>Fable 5.2 · max</td><td>48/48</td><td>26 min 42 s</td><td>132.112</td><td class="opt">56</td><td>25</td><td>US$ 9.78</td></tr>
+    <tr><td>Fable 5.2 · low</td><td>48/48</td><td>1 min 05 s</td><td>1,015</td><td class="opt">16</td><td>3</td><td>US$ 0.72</td></tr>
+    <tr><td>Fable 5.2 · medium</td><td>48/48</td><td>1 min 26 s</td><td>1,646</td><td class="opt">12</td><td>4</td><td>US$ 0.83</td></tr>
+    <tr><td>Fable 5.2 · high</td><td>48/48</td><td>1 min 53 s</td><td>3,174</td><td class="opt">23</td><td>7</td><td>US$ 1.05</td></tr>
+    <tr><td>Fable 5.2 · xhigh</td><td>48/48</td><td>5 min 03 s</td><td>18,580</td><td class="opt">33</td><td>10</td><td>US$ 2.21</td></tr>
+    <tr><td>Fable 5.2 · max</td><td>48/48</td><td>26 min 42 s</td><td>132,112</td><td class="opt">56</td><td>25</td><td>US$ 9.78</td></tr>
     <tr><td>Opus 5.5 · low</td><td>48/48</td><td>1 min 04 s</td><td>253</td><td class="opt">11</td><td>5</td><td>US$ 0.30</td></tr>
     <tr><td>Opus 5.5 · medium</td><td>48/48</td><td>1 min 29 s</td><td>760</td><td class="opt">13</td><td>4</td><td>US$ 0.39</td></tr>
-    <tr><td>Opus 5.5 · high</td><td>48/48</td><td>1 min 58 s</td><td>2.036</td><td class="opt">12</td><td>4</td><td>US$ 0.48</td></tr>
-    <tr><td>Opus 5.5 · xhigh</td><td>48/48</td><td>3 min 35 s</td><td>7.472</td><td class="opt">26</td><td>10</td><td>US$ 0.79</td></tr>
-    <tr><td>Opus 5.5 · max</td><td>48/48</td><td>18 min 06 s</td><td>92.889</td><td class="opt">48</td><td>16</td><td>US$ 3.77</td></tr>
+    <tr><td>Opus 5.5 · high</td><td>48/48</td><td>1 min 58 s</td><td>2,036</td><td class="opt">12</td><td>4</td><td>US$ 0.48</td></tr>
+    <tr><td>Opus 5.5 · xhigh</td><td>48/48</td><td>3 min 35 s</td><td>7,472</td><td class="opt">26</td><td>10</td><td>US$ 0.79</td></tr>
+    <tr><td>Opus 5.5 · max</td><td>48/48</td><td>18 min 06 s</td><td>92,889</td><td class="opt">48</td><td>16</td><td>US$ 3.77</td></tr>
   </table></div>
   <div class="grid g2" style="margin-top:22px">
-    <div class="card"><h3>What increased with effort</h3><p>Thinking increased at every step in both models. Checks (running code to verify) grew a little from <em>low</em> to <em>high</em> (Fable 3 → 7, Opus 5 → 4) and jumped at <em>xhigh</em> and <em>max</em> (Fable 25, Opus 16): at those levels, the model writes test scripts, looks for edge cases, and checks again.</p></div>
+    <div class="card"><h3>What increased with effort</h3><p>Thinking increased at every step in both models. Checks (running code to verify) grew a little from <em>low</em> to <em>high</em> (Fable 3 → 7, Opus stayed flat, 5 → 4) and jumped at <em>xhigh</em> and <em>max</em> (Fable 25, Opus 16): at those levels, the model writes test scripts, looks for edge cases, and checks again.</p></div>
     <div class="card"><h3>What didn’t change</h3><p>The score. These short, clearly described tasks were already solved at the lowest level. Opus 5.5 at <em>low</em> got everything right at the lowest cost (US$ 0.30), about 32× less than Fable 5.2 at <em>max</em>.</p></div>
   </div>
   <p class="hint">swipe the table sideways →</p>
   <p class="note">* Cost calculated by Claude Code from the API price table (summed before rounding); with a subscription, you pay from your usage limit, so ~14× and ~32× are equivalent cost ratios, not changes to your limit. Thinking = reasoning tokens counted in each run’s log (the number in parentheses in RESULTADO.md). <strong>Read carefully:</strong> these are short tasks, one run each. They don’t show where high effort helps: according to Anthropic, at low effort, long tasks tend to stop before they’re finished, and open-ended, difficult problems benefit from more effort. None of these runs stopped early or called a subagent. Full records: <a href="https://github.com/inematds/esforco-medido/tree/main/exemplos" target="_blank" rel="noopener">exemplos/</a>.</p>
-  <p class="note"><strong>Repetition (noise):</strong> Fable 5.2 on the <em>carrinho</em> (shopping cart) task, <em>low</em> and <em>high</em> three times each → all 12/12; <em>low</em> 26–33 s, <em>high</em> 39–49 s, and <em>high</em> always thought longer. The number of tools varied from 3 to 12 across identical runs: compare reasoning and time, not an isolated tool count.</p>
+  <p class="note"><strong>Repetition (noise):</strong> Fable 5.2 on the <em>carrinho</em> (shopping cart) task, <em>low</em> and <em>high</em> three times each → all 12/12; <em>low</em> 26–33 s, <em>high</em> 39–49 s, and <em>high</em> always thought more (more reasoning tokens). The number of tools varied from 3 to 12 across identical runs: compare reasoning and time, not an isolated tool count.</p>
 </div></section>
 
 <section id="dicas"><div class="wrap">
@@ -237,7 +237,7 @@
       <div class="dica"><b>7. Use xhigh only where you’ve measured a gain.</b><span>Max is for measuring the ceiling or for the rare task where time doesn’t matter.</span></div>
     </div>
     <div>
-      <div class="dica"><b>8. Use low effort to finish sooner.</b><span>Paste the “finish the work” block into CLAUDE.md (it’s in the kit).</span></div>
+      <div class="dica"><b>8. Low effort can stop too early.</b><span>Paste the “finish the work” block into CLAUDE.md (it’s in the kit).</span></div>
       <div class="dica"><b>9. “Think less” doesn’t work in Fable 5.2.</b><span>Lower the level instead of asking.</span></div>
       <div class="dica"><b>10. At high+, Fable even thinks before saying “hi.”</b><span>Easy turns call for a low level.</span></div>
       <div class="dica"><b>11. At xhigh/max, Fable may call subagents.</b><span>A subagent is another copy of the AI that it opens for part of the work, and each one uses resources. Anthropic says it does this to review its own work; it didn’t do so in the short runs here.</span></div>
@@ -301,7 +301,7 @@
     <p>Clone it and run the tests (no network required).</p>
 <pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/esforco-medido.git</span>
 <span class="k">cd</span> esforco-medido
-<span class="k">python3</span> -m unittest discover tests   <span class="c"># 18 testes OK</span></pre>
+<span class="k">python3</span> -m unittest discover tests   <span class="c"># 18 tests OK</span></pre>
   </div></div>
   <div class="step"><div class="b">2</div><div>
     <h3>Run a small measurement</h3>
@@ -311,7 +311,7 @@
   <div class="step"><div class="b">3</div><div>
     <h3>Run the full sweep</h3>
     <p>Fable and Opus, low → max (10 runs). Use <code>-r 3</code> to repeat each one before drawing a conclusion.</p>
-<pre><span class="k">./medir.sh</span> calendario                     <span class="c"># padrão: -m fable,opus -e low,medium,high,xhigh,max</span>
+<pre><span class="k">./medir.sh</span> calendario                     <span class="c"># default: -m fable,opus -e low,medium,high,xhigh,max</span>
 <span class="k">./medir.sh</span> calendario -m fable -e low,high -r 3</pre>
   </div></div>
   <div class="step"><div class="b">4</div><div>
@@ -324,17 +324,17 @@
     <p>Choose the lowest level that gets it right. If the model stops before finishing, paste Anthropic’s block into CLAUDE.md.</p>
 <pre><span class="c"># in Claude Code</span>
 /effort medium
-<span class="c"># bloco "terminar o trabalho"</span>
-<span class="k">printf</span> '\n# Terminar o trabalho\n' >> CLAUDE.md && <span class="k">cat</span> dicas/terminar-o-trabalho.pt.txt >> CLAUDE.md</pre>
+<span class="c"># "finish the work" block</span>
+<span class="k">printf</span> '\n# Finish the work\n' >> CLAUDE.md && <span class="k">cat</span> dicas/terminar-o-trabalho.en.txt >> CLAUDE.md</pre>
   </div></div>
   <div class="step"><div class="b">6</div><div>
     <h3>Measure one of your sessions (optional)</h3>
     <p>The same counts from a Claude Code session that’s already been recorded.</p>
-<pre><span class="k">python3</span> relatorio.py sessao ~/.claude/projects/&lt;projeto&gt;/&lt;sessao&gt;.jsonl</pre>
+<pre><span class="k">python3</span> relatorio.py sessao ~/.claude/projects/&lt;project&gt;/&lt;session&gt;.jsonl</pre>
   </div></div>
   <div class="step"><div class="b">7</div><div>
     <h3>Create your own task</h3>
-    <p><code>tarefas/&lt;nome&gt;/projeto/</code> (the code the AI receives), <code>pedido.txt</code> (the prompt), and <code>oculto/checar.py &lt;pasta&gt;</code>, which prints <code>NOTA n/total</code>.</p>
+    <p><code>tarefas/&lt;name&gt;/projeto/</code> (the code the AI receives), <code>pedido.txt</code> (the prompt), and <code>oculto/checar.py &lt;folder&gt;</code>, which prints <code>NOTA n/total</code>.</p>
 <pre><span class="k">./medir.sh</span> minha-tarefa -e low,high</pre>
   </div></div>
 </div></section>

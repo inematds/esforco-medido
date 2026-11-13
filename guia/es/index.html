@@ -145,7 +145,7 @@
     <div>
       <span class="chip">Claude Fable 5.2 · Claude Opus 5.5</span>
       <h1>Subes el esfuerzo y pagas más. <span class="amb">Esfuerzo medido</span> muestra qué cambia.</h1>
-      <p class="lead">Hice 30 mediciones: en las 3 tareas, el esfuerzo mínimo acertó todo, igual que el máximo, que costó cerca de 14× más. El esfuerzo cambia cuánto piensa y verifica la IA, y el nivel “alto” de un modelo no es el mismo que el del otro.</p>
+      <p class="lead">Hice 30 mediciones: en las 3 tareas, el esfuerzo mínimo acertó todo, igual que el máximo, que en Fable costó cerca de 14× más. El esfuerzo cambia cuánto piensa y verifica la IA, y el nivel “alto” de un modelo no es el mismo que el del otro.</p>
       <div class="cta">
         <a class="btn" href="#mito">Entender en 5 minutos</a>
         <a class="btn ghost" href="https://github.com/inematds/esforco-medido" target="_blank" rel="noopener">Ver en GitHub</a>
@@ -188,7 +188,7 @@
     <tr><td>Trampa</td><td>“piensa menos” en el prompt no funciona a partir de medium: baja el nivel</td><td>quien copió el nivel de Opus 5 ejecuta un nivel distinto del que cree</td></tr>
     <tr><td>Precio en la API (por millón de tokens, entrada/salida)</td><td>US$ 8 / US$ 40</td><td>US$ 4 / US$ 20</td></tr>
   </table></div>
-  <p class="note">En Claude Code, consulta el nivel de la sesión con <code>/effort status</code> y cámbialo con <code>/effort &lt;nível&gt;</code>; el nuevo nivel se aplica a partir del siguiente mensaje. <em>Ultracode</em> no es un nivel: es una configuración que arma un equipo de agentes con el nivel de esfuerzo que tenga la sesión.</p>
+  <p class="note">En Claude Code, consulta el nivel de la sesión con <code>/effort status</code> y cámbialo con <code>/effort &lt;nivel&gt;</code>; el nuevo nivel se aplica a partir del siguiente mensaje. <em>Ultracode</em> no es un nivel: es una configuración que arma un equipo de agentes con el nivel de esfuerzo que tenga la sesión.</p>
 </div></section>
 
 <section id="medido"><div class="wrap">
@@ -214,7 +214,7 @@
     <tr><td>Opus 5.5 · max</td><td>48/48</td><td>18 min 06 s</td><td>92.889</td><td class="opt">48</td><td>16</td><td>US$ 3,77</td></tr>
   </table></div>
   <div class="grid g2" style="margin-top:22px">
-    <div class="card"><h3>Qué aumentó con el esfuerzo</h3><p>El pensamiento aumentó en cada nivel, en ambos modelos. Las verificaciones (ejecutar el código para comprobarlo) crecieron poco de <em>low</em> a <em>high</em> (Fable 3 → 7, Opus 5 → 4) y se dispararon en <em>xhigh</em> y <em>max</em> (Fable 25, Opus 16): ahí el modelo escribe scripts de prueba, busca casos límite y vuelve a verificar.</p></div>
+    <div class="card"><h3>Qué aumentó con el esfuerzo</h3><p>El pensamiento aumentó en cada nivel, en ambos modelos. Las verificaciones (ejecutar el código para comprobarlo) crecieron poco de <em>low</em> a <em>high</em> (Fable 3 → 7, en Opus se mantuvieron, 5 → 4) y se dispararon en <em>xhigh</em> y <em>max</em> (Fable 25, Opus 16): ahí el modelo escribe scripts de prueba, busca casos límite y vuelve a verificar.</p></div>
     <div class="card"><h3>Qué no cambió</h3><p>La puntuación. En estas tareas cortas y bien descritas, el nivel más bajo ya las resolvió. Opus 5.5 en <em>low</em> acertó todo con el menor costo (US$ 0,30), cerca de 32× menos que Fable 5.2 en <em>max</em>.</p></div>
   </div>
   <p class="hint">desliza la tabla hacia un lado →</p>
@@ -237,7 +237,7 @@
       <div class="dica"><b>7. Usa xhigh solo donde mediste una mejora.</b><span>Max sirve para medir el límite o para esa tarea excepcional en la que el tiempo no importa.</span></div>
     </div>
     <div>
-      <div class="dica"><b>8. Usa esfuerzo bajo para terminar antes.</b><span>Pega el bloque “terminar el trabajo” en CLAUDE.md (está en el kit).</span></div>
+      <div class="dica"><b>8. El esfuerzo bajo puede detenerse antes de tiempo.</b><span>Pega el bloque “terminar el trabajo” en CLAUDE.md (está en el kit).</span></div>
       <div class="dica"><b>9. “Piensa menos” no funciona en Fable 5.2.</b><span>Baja el nivel en vez de pedirlo.</span></div>
       <div class="dica"><b>10. En high+, Fable piensa hasta para decir “hola”.</b><span>Para un turno fácil, usa un nivel bajo.</span></div>
       <div class="dica"><b>11. En xhigh/max, Fable puede llamar a subagentes.</b><span>Un subagente es otra copia de la IA que abre para una parte del trabajo, y cada una genera un costo. Anthropic dice que lo hace para revisar su propio trabajo; en las rondas cortas de aquí, no lo hizo.</span></div>
@@ -325,16 +325,16 @@
 <pre><span class="c"># en Claude Code</span>
 /effort medium
 <span class="c"># bloque "terminar el trabajo"</span>
-<span class="k">printf</span> '\n# Terminar el trabajo\n' >> CLAUDE.md && <span class="k">cat</span> dicas/terminar-o-trabalho.pt.txt >> CLAUDE.md</pre>
+<span class="k">printf</span> '\n# Terminar el trabajo\n' >> CLAUDE.md && <span class="k">cat</span> dicas/terminar-o-trabalho.es.txt >> CLAUDE.md</pre>
   </div></div>
   <div class="step"><div class="b">6</div><div>
     <h3>Mide una sesión tuya (opcional)</h3>
     <p>Los mismos recuentos en una sesión ya grabada de Claude Code.</p>
-<pre><span class="k">python3</span> relatorio.py sessao ~/.claude/projects/&lt;projeto&gt;/&lt;sessao&gt;.jsonl</pre>
+<pre><span class="k">python3</span> relatorio.py sessao ~/.claude/projects/&lt;proyecto&gt;/&lt;sesion&gt;.jsonl</pre>
   </div></div>
   <div class="step"><div class="b">7</div><div>
     <h3>Crea una tarea propia</h3>
-    <p><code>tarefas/&lt;nome&gt;/projeto/</code> (el código que recibe la IA), <code>pedido.txt</code> (el pedido) y <code>oculto/checar.py &lt;pasta&gt;</code>, que imprime <code>NOTA n/total</code>.</p>
+    <p><code>tarefas/&lt;nombre&gt;/projeto/</code> (el código que recibe la IA), <code>pedido.txt</code> (el pedido) y <code>oculto/checar.py &lt;carpeta&gt;</code>, que imprime <code>NOTA n/total</code>.</p>
 <pre><span class="k">./medir.sh</span> minha-tarefa -e low,high</pre>
   </div></div>
 </div></section>

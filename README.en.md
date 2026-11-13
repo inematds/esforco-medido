@@ -38,11 +38,11 @@ combination. **All 30 got the maximum score.** What changed was everything else 
 | Opus 5.5 · medium | 48/48 | 1 min 29 s | 760 | 4 | US$ 0,39 |
 | Opus 5.5 · max | 48/48 | 18 min 06 s | 92,889 | 16 | US$ 3,77 |
 
-Thinking increased at every step; checks grew only slightly through `high` (Fable 3 → 7, Opus 5 → 4) and jumped
+Thinking increased at every step; checks grew only slightly through `high` (Fable 3 → 7; Opus stayed flat, 5 → 4) and jumped
 at `xhigh` and `max` (Fable 25, Opus 16). These are short tasks: they don't show where high effort helps (long work,
 open-ended problems). The complete tables, with all 5 levels, are in `exemplos/`.
 
-Repetition (noise): Fable 5.2 on the `carrinho` (shopping cart) task, `low` and `high` three times each → all 12/12; `low` 26–33 s, `high` 39–49 s, and `high` always thought longer. The number of tools varied from 3 to 12 across identical runs: compare reasoning and time, not an isolated tool count (`exemplos/carrinho-repeticao/`).
+Repetition (noise): Fable 5.2 on the `carrinho` (shopping cart) task, `low` and `high` three times each → all 12/12; `low` 26–33 s, `high` 39–49 s, and `high` always thought more (more reasoning tokens). The number of tools varied from 3 to 12 across identical runs: compare reasoning and time, not an isolated tool count (`exemplos/carrinho-repeticao/`).
 
 \* Cost calculated by Claude Code using the API pricing table; with a subscription, you pay in usage limits.
 
@@ -64,7 +64,7 @@ cat dicas/DICAS.md                               # the 14 tips
 | `relatorio.py` | Reads each run's stream-json and counts tools (by type), checks (code run to verify, including the test suite), edits, rereads after editing, subagents, errors, thinking tokens, time, equivalent cost, and whether the final response offers to continue instead of finishing. `sessao <arquivo.jsonl>` does the same counts for one of your sessions. |
 | `tarefas/` | 3 tasks with a hidden checker (`oculto/checar.py`, score `n/total`): `intervalos` (easy, 16 cases), `carrinho` (find 6 bugs using the rules in a file, 12 cases), `calendario` (5 functions with moving holidays, 20 cases). |
 | `dicas/DICAS.md` | 14 effort tips for Fable 5.2 and Opus 5.5, with a source for each (in Portuguese). |
-| `dicas/terminar-o-trabalho.pt.txt` | (in Portuguese) Anthropic's "finish the job" block, to paste into CLAUDE.md when the model stops too soon (original in `.en.txt`). |
+| `dicas/terminar-o-trabalho.en.txt` | Anthropic's "finish the job" block (also in `.pt.txt` and `.es.txt`), to paste into CLAUDE.md when the model stops too soon (original in `.en.txt`). |
 | `exemplos/` | Actual runs from this kit (11/12/2026): `RESULTADO.md` and `resultado.json` for each task. |
 | `tests/` | 18 tests without network access: `python3 -m unittest discover tests`. |
 
@@ -82,7 +82,7 @@ would type it), and `oculto/checar.py <folder>` that prints `NOTA n/total`. Run 
 | 3 | Measure the levels | `./medir.sh <task> [-m …] [-e …] [-r 3]` | ⚙️ script + 🤖 `claude -p` |
 | 4 | Read the results | `resultados/<task>-<date>/RESULTADO.md` | 🧠 you |
 | 5 | Set the level | `/effort <level>` or `effortLevel` / `modelSettings` in settings | 🧠 you |
-| 6 | If it stops early | Paste `dicas/terminar-o-trabalho.pt.txt` into CLAUDE.md | 🧠 you |
+| 6 | If it stops early | Paste `dicas/terminar-o-trabalho.en.txt` into CLAUDE.md | 🧠 you |
 
 ## Notes
 

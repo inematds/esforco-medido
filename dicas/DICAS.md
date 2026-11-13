@@ -29,7 +29,7 @@ mediu (ver `exemplos/`). Lido em 12/11/2026.
 
 ## Armadilhas
 
-8. **Esforço baixo para mais cedo.** Em tarefa longa, o modelo às vezes encerra o turno com uma lista do que falta ou
+8. **Esforço baixo pode parar antes da hora.** Em tarefa longa, o modelo às vezes encerra o turno com uma lista do que falta ou
    oferecendo continuar, e isso acontece mais no `low` e no `medium`. Se acontecer, cole o bloco
    `dicas/terminar-o-trabalho.pt.txt` no CLAUDE.md, sob `# Terminar o trabalho` (o original em inglês está ao lado).
    Nos testes da Anthropic, ele cortou pela metade as sessões que terminavam com trabalho por fazer, e a saída cresceu
