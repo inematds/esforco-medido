@@ -131,6 +131,7 @@
     <a class="sec" href="#mito">Esfuerzo ≠ tiempo</a>
     <a class="sec" href="#modelos">Fable × Opus</a>
     <a class="sec" href="#medido">Qué medí</a>
+    <a class="sec" href="#qual">Cuál usar</a>
     <a class="sec" href="#dicas">Consejos</a>
     <a class="sec" href="#tecnico">Kit (técnico)</a>
     <span class="lang"><a href="../">PT</a><a href="../en/">EN</a><a class="on" href="./">ES</a></span>
@@ -220,6 +221,28 @@
   </div>
   <p class="note">* Costo que Claude Code calcula según la tabla de la API (sumado antes de redondear); con la suscripción pagas con tu límite, así que ~14× y ~32× son proporciones de costo equivalente, no de tu límite. Pensamiento = tokens de razonamiento contados en el registro de cada ronda (en RESULTADO.md, el número entre paréntesis). <strong>Lee con cuidado:</strong> son tareas cortas, una ronda cada una. No muestran en qué casos ayuda el esfuerzo alto: según Anthropic, en trabajos largos el esfuerzo bajo tiende a detenerse antes de terminar, y los problemas abiertos y difíciles se benefician de más esfuerzo. En estas rondas, ningún modelo se detuvo antes ni llamó a un subagente. Cuadros completos: <a href="https://github.com/inematds/esforco-medido/tree/main/exemplos" target="_blank" rel="noopener">exemplos/</a>.</p>
   <p class="note"><strong>Repetición (ruido):</strong> Fable 5.2 en la tarea <em>carrinho</em> (carrito), <em>low</em> y <em>high</em> 3 veces cada uno → todas 12/12; <em>low</em> 26–33 s, <em>high</em> 39–49 s, y el <em>high</em> siempre pensó más. En cambio, el número de herramientas varió de 3 a 12 entre rondas iguales: compara el razonamiento y el tiempo, no un recuento aislado de herramientas.</p>
+</div></section>
+
+<section id="qual"><div class="wrap">
+  <span class="chip">Cuál usar</span>
+  <h2>Fable 5.2 u Opus 5.5: <span class="amb">por dónde empezar</span></h2>
+  <p class="sub">Empieza por el nivel que recomienda Anthropic y bájalo mientras la puntuación se mantenga. En las 3 tareas cortas de este kit, Opus 5.5 resultó más barato que Fable 5.2 en todos los niveles, con la misma puntuación máxima.</p>
+  <p class="hint">arrastra la tabla hacia un lado →</p>
+  <div class="tw"><table>
+    <tr><th>Situación</th><th>Empieza con</th><th>De dónde viene</th></tr>
+    <tr><td>Código corto y bien descrito, como las tareas del kit</td><td>Opus 5.5 · low (verifica el resultado)</td><td>Medido aquí: 30 de 30 con la puntuación máxima</td></tr>
+    <tr><td>Uso general con Opus</td><td>Opus 5.5 · medium, y prueba los niveles vecinos</td><td>Guía de Anthropic</td></tr>
+    <tr><td>Uso general con Fable</td><td>Fable 5.2 · high</td><td>Guía de Anthropic</td></tr>
+    <tr><td>Código interactivo, chat y uso diario con Fable</td><td>Fable 5.2 · medium, si la calidad se mantiene</td><td>Guía de Anthropic</td></tr>
+    <tr><td>Tarea rápida y subagentes con Fable</td><td>Fable 5.2 · low</td><td>Guía de Anthropic</td></tr>
+    <tr><td>Medir el límite del modelo</td><td>max, solo si el tiempo y los tokens no importan</td><td>Guía de Anthropic</td></tr>
+  </table></div>
+  <div class="tw" style="margin-top:18px"><table>
+    <tr><th>Costo equivalente* promedio por ronda</th><th>low</th><th>medium</th><th>high</th><th>xhigh</th><th>max</th></tr>
+    <tr><td>Fable 5.2</td><td>US$ 0,24</td><td>US$ 0,27</td><td>US$ 0,35</td><td>US$ 0,74</td><td>US$ 3,26</td></tr>
+    <tr><td>Opus 5.5</td><td>US$ 0,10</td><td>US$ 0,13</td><td>US$ 0,16</td><td>US$ 0,26</td><td>US$ 1,26</td></tr>
+  </table></div>
+  <p class="note">* Promedio de las 3 tareas (calendario, carrito, intervalos), una ronda por combinación, 12/11/2026. Con la suscripción pagas con límite, no en dólares. La mayor diferencia entre <em>max</em> y <em>low</em> fue en el calendario: Opus costó 17,6× más en <em>max</em> (US$ 1,58 frente a US$ 0,09). Una tarea larga o abierta puede requerir más esfuerzo: mídelo en la tuya con <code>./medir.sh</code>. Página completa: <a href="https://github.com/inematds/esforco-medido/blob/main/dicas/QUAL-USAR.md" target="_blank" rel="noopener">dicas/QUAL-USAR.md</a> (en portugués).</p>
 </div></section>
 
 <section id="dicas"><div class="wrap">

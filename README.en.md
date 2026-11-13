@@ -64,6 +64,7 @@ cat dicas/DICAS.md                               # the 14 tips
 | `relatorio.py` | Reads each run's stream-json and counts tools (by type), checks (code run to verify, including the test suite), edits, rereads after editing, subagents, errors, thinking tokens, time, equivalent cost, and whether the final response offers to continue instead of finishing. `sessao <arquivo.jsonl>` does the same counts for one of your sessions. |
 | `tarefas/` | 3 tasks with a hidden checker (`oculto/checar.py`, score `n/total`): `intervalos` (easy, 16 cases), `carrinho` (find 6 bugs using the rules in a file, 12 cases), `calendario` (5 functions with moving holidays, 20 cases). |
 | `dicas/DICAS.md` | 14 effort tips for Fable 5.2 and Opus 5.5, with a source for each (in Portuguese). |
+| `dicas/QUAL-USAR.md` | Fable 5.2 or Opus 5.5: where to start, with the numbers measured here and what comes from the Anthropic guide (1 page, in Portuguese). |
 | `dicas/terminar-o-trabalho.en.txt` | Anthropic's "finish the job" block (also in `.pt.txt` and `.es.txt`), to paste into CLAUDE.md when the model stops too soon (original in `.en.txt`). |
 | `exemplos/` | Actual runs from this kit (11/12/2026): `RESULTADO.md` and `resultado.json` for each task. |
 | `tests/` | 18 tests without network access: `python3 -m unittest discover tests`. |

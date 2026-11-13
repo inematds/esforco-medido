@@ -53,6 +53,7 @@ cat dicas/DICAS.md                               # los 14 consejos
 | `relatorio.py` | Lee el stream-json de cada ronda y cuenta herramientas (por tipo), revisiones (código ejecutado para comprobar, incluida la suite), ediciones, relecturas después de editar, subagentes, errores, tokens de pensamiento, tiempo, costo equivalente y si al final propone continuar en vez de terminar. `sessao <arquivo.jsonl>` hace los mismos conteos en una sesión tuya. |
 | `tarefas/` | 3 tareas con verificador oculto (`oculto/checar.py`, puntuación `n/total`): `intervalos` (fácil, 16 casos), `carrinho` (buscar 6 errores según las reglas de un archivo, 12 casos), `calendario` (5 funciones con feriados móviles, 20 casos). |
 | `dicas/DICAS.md` | 14 consejos sobre esfuerzo para Fable 5.2 y Opus 5.5, con la fuente de cada uno (en portugués). |
+| `dicas/QUAL-USAR.md` | Fable 5.2 u Opus 5.5: por dónde empezar, con los números medidos aquí y lo que viene de la guía de Anthropic (1 página, en portugués). |
 | `dicas/terminar-o-trabalho.es.txt` | El bloque «terminar el trabajo» de Anthropic, para pegar en CLAUDE.md cuando el modelo se detenga antes de tiempo (en portugués; el original está en `.en.txt`). |
 | `exemplos/` | Las rondas reales de este kit (12/11/2026): `RESULTADO.md` y `resultado.json` de cada tarea. |
 | `tests/` | 18 pruebas sin red: `python3 -m unittest discover tests`. |

@@ -131,6 +131,7 @@
     <a class="sec" href="#mito">Effort ≠ time</a>
     <a class="sec" href="#modelos">Fable × Opus</a>
     <a class="sec" href="#medido">What I measured</a>
+    <a class="sec" href="#qual">Which to use</a>
     <a class="sec" href="#dicas">Tips</a>
     <a class="sec" href="#tecnico">Kit (technical)</a>
     <span class="lang"><a href="../">PT</a><a class="on" href="./">EN</a><a href="../es/">ES</a></span>
@@ -220,6 +221,28 @@
   </div>
   <p class="note">* Cost calculated by Claude Code from the API price table (summed before rounding); with a subscription, you pay from your usage limit, so ~14× and ~32× are equivalent cost ratios, not changes to your limit. Thinking = reasoning tokens counted in each run’s log (the number in parentheses in RESULTADO.md). <strong>Read carefully:</strong> these are short tasks, one run each. They don’t show where high effort helps: according to Anthropic, at low effort, long tasks tend to stop before they’re finished, and open-ended, difficult problems benefit from more effort. None of these runs stopped early or called a subagent. Full records: <a href="https://github.com/inematds/esforco-medido/tree/main/exemplos" target="_blank" rel="noopener">exemplos/</a>.</p>
   <p class="note"><strong>Repetition (noise):</strong> Fable 5.2 on the <em>carrinho</em> (shopping cart) task, <em>low</em> and <em>high</em> three times each → all 12/12; <em>low</em> 26–33 s, <em>high</em> 39–49 s, and <em>high</em> always thought more (more reasoning tokens). The number of tools varied from 3 to 12 across identical runs: compare reasoning and time, not an isolated tool count.</p>
+</div></section>
+
+<section id="qual"><div class="wrap">
+  <span class="chip">Which one to use</span>
+  <h2>Fable 5.2 or Opus 5.5: <span class="amb">where to start</span></h2>
+  <p class="sub">Start with the level Anthropic recommends and step down as long as the score holds. In the 3 short tasks in this kit, Opus 5.5 was cheaper than Fable 5.2 at every level, with the same top score.</p>
+  <p class="hint">drag the table sideways →</p>
+  <div class="tw"><table>
+    <tr><th>Situation</th><th>Start with</th><th>Source</th></tr>
+    <tr><td>Short, clearly described code, like the tasks in this kit</td><td>Opus 5.5 · low (check the result)</td><td>Measured here: 30 out of 30 with a top score</td></tr>
+    <tr><td>General use with Opus</td><td>Opus 5.5 · medium, and test the neighboring levels</td><td>Anthropic guide</td></tr>
+    <tr><td>General use with Fable</td><td>Fable 5.2 · high</td><td>Anthropic guide</td></tr>
+    <tr><td>Interactive coding, chat, and everyday use with Fable</td><td>Fable 5.2 · medium, if quality holds</td><td>Anthropic guide</td></tr>
+    <tr><td>Quick tasks and subagents with Fable</td><td>Fable 5.2 · low</td><td>Anthropic guide</td></tr>
+    <tr><td>Measure the model's upper limit</td><td>max, only if time and tokens don't matter</td><td>Anthropic guide</td></tr>
+  </table></div>
+  <div class="tw" style="margin-top:18px"><table>
+    <tr><th>Average equivalent cost* per run</th><th>low</th><th>medium</th><th>high</th><th>xhigh</th><th>max</th></tr>
+    <tr><td>Fable 5.2</td><td>US$0.24</td><td>US$0.27</td><td>US$0.35</td><td>US$0.74</td><td>US$3.26</td></tr>
+    <tr><td>Opus 5.5</td><td>US$0.10</td><td>US$0.13</td><td>US$0.16</td><td>US$0.26</td><td>US$1.26</td></tr>
+  </table></div>
+  <p class="note">* Average across the 3 tasks (calendar, cart, intervals), one run per combination, 11/12/2026. With a subscription, you pay against a usage limit, not in dollars. The biggest gap between <em>max</em> and <em>low</em> was on the calendar task: Opus cost 17.6× more at <em>max</em> (US$1.58 vs. US$0.09). Long or open-ended tasks may need more effort: measure yours with <code>./medir.sh</code>. Full page: <a href="https://github.com/inematds/esforco-medido/blob/main/dicas/QUAL-USAR.md" target="_blank" rel="noopener">dicas/QUAL-USAR.md (in Portuguese)</a>.</p>
 </div></section>
 
 <section id="dicas"><div class="wrap">

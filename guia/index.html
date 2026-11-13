@@ -131,6 +131,7 @@
     <a class="sec" href="#mito">Esforço ≠ tempo</a>
     <a class="sec" href="#modelos">Fable × Opus</a>
     <a class="sec" href="#medido">O que eu medi</a>
+    <a class="sec" href="#qual">Qual usar</a>
     <a class="sec" href="#dicas">Dicas</a>
     <a class="sec" href="#tecnico">Kit (técnico)</a>
     <span class="lang"><a class="on" href="./">PT</a><a href="en/">EN</a><a href="es/">ES</a></span>
@@ -220,6 +221,28 @@
   </div>
   <p class="note">* Custo que o Claude Code calcula pela tabela da API (somado antes de arredondar); na assinatura você paga em limite, então ~14× e ~32× são razões de custo equivalente, não do seu limite. Pensamento = tokens de raciocínio contados no registro de cada rodada (no RESULTADO.md, o número entre parênteses). <strong>Leia com cuidado:</strong> são tarefas curtas, uma rodada cada. Elas não mostram onde o esforço alto ajuda: segundo a Anthropic, em trabalho longo o esforço baixo tende a parar antes de terminar, e problemas abertos e difíceis ganham com mais esforço. Nestas rodadas nenhum modelo parou antes nem chamou subagente. Quadros completos: <a href="https://github.com/inematds/esforco-medido/tree/main/exemplos" target="_blank" rel="noopener">exemplos/</a>.</p>
   <p class="note"><strong>Repetição (ruído):</strong> Fable 5.2 no carrinho, <em>low</em> e <em>high</em> 3 vezes cada: todas 12/12; <em>low</em> 26–33 s, <em>high</em> 39–49 s, e o <em>high</em> sempre pensou mais. O número de ferramentas variou de 3 a 12 entre rodadas iguais: compare pensamento e tempo, não uma contagem solta de ferramentas.</p>
+</div></section>
+
+<section id="qual"><div class="wrap">
+  <span class="chip">Qual usar</span>
+  <h2>Fable 5.2 ou Opus 5.5: <span class="amb">por onde começar</span></h2>
+  <p class="sub">Comece pelo nível que a Anthropic indica e desça enquanto a nota se mantiver. Nas 3 tarefas curtas deste kit, o Opus 5.5 saiu mais barato que o Fable 5.2 em todos os níveis, com a mesma nota máxima.</p>
+  <p class="hint">arraste a tabela para o lado →</p>
+  <div class="tw"><table>
+    <tr><th>Situação</th><th>Comece com</th><th>De onde vem</th></tr>
+    <tr><td>Código curto e bem descrito, como as tarefas do kit</td><td>Opus 5.5 · low (confira o resultado)</td><td>Medido aqui: 30 de 30 com nota máxima</td></tr>
+    <tr><td>Uso geral com o Opus</td><td>Opus 5.5 · medium, e teste os vizinhos</td><td>Guia da Anthropic</td></tr>
+    <tr><td>Uso geral com o Fable</td><td>Fable 5.2 · high</td><td>Guia da Anthropic</td></tr>
+    <tr><td>Código interativo, chat e dia a dia no Fable</td><td>Fable 5.2 · medium, se a qualidade se mantiver</td><td>Guia da Anthropic</td></tr>
+    <tr><td>Tarefa rápida e subagentes no Fable</td><td>Fable 5.2 · low</td><td>Guia da Anthropic</td></tr>
+    <tr><td>Medir o teto do modelo</td><td>max, só se tempo e tokens não importarem</td><td>Guia da Anthropic</td></tr>
+  </table></div>
+  <div class="tw" style="margin-top:18px"><table>
+    <tr><th>Custo equivalente* médio por rodada</th><th>low</th><th>medium</th><th>high</th><th>xhigh</th><th>max</th></tr>
+    <tr><td>Fable 5.2</td><td>US$ 0,24</td><td>US$ 0,27</td><td>US$ 0,35</td><td>US$ 0,74</td><td>US$ 3,26</td></tr>
+    <tr><td>Opus 5.5</td><td>US$ 0,10</td><td>US$ 0,13</td><td>US$ 0,16</td><td>US$ 0,26</td><td>US$ 1,26</td></tr>
+  </table></div>
+  <p class="note">* Média das 3 tarefas (calendário, carrinho, intervalos), uma rodada por combinação, 12/11/2026. Na assinatura você paga em limite, não em dólar. A maior distância entre <em>max</em> e <em>low</em> foi no calendário: o Opus custou 17,6× mais no <em>max</em> (US$ 1,58 contra US$ 0,09). Tarefa longa ou aberta pode pedir mais esforço: meça na sua com o <code>./medir.sh</code>. Página completa: <a href="https://github.com/inematds/esforco-medido/blob/main/dicas/QUAL-USAR.md" target="_blank" rel="noopener">dicas/QUAL-USAR.md</a>.</p>
 </div></section>
 
 <section id="dicas"><div class="wrap">
