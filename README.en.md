@@ -38,7 +38,7 @@ combination. **All 30 got the maximum score.** What changed was everything else 
 | Opus 5.5 · medium | 48/48 | 1 min 29 s | 760 | 4 | US$ 0,39 |
 | Opus 5.5 · max | 48/48 | 18 min 06 s | 92,889 | 16 | US$ 3,77 |
 
-Thinking increased at every step; checks grew only slightly through `high` (Fable 3 → 7; Opus stayed flat, 5 → 4) and jumped
+Thinking increased at every step; checks grew only slightly through `high` (Fable 3 → 7; Opus barely changed, 5 → 4) and jumped
 at `xhigh` and `max` (Fable 25, Opus 16). These are short tasks: they don't show where high effort helps (long work,
 open-ended problems). The complete tables, with all 5 levels, are in `exemplos/`.
 

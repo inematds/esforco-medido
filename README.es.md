@@ -29,7 +29,7 @@ El esfuerzo no es un cronómetro. Según la documentación de Anthropic, control
 | Opus 5.5 · medium | 48/48 | 1 min 29 s | 760 | 4 | US$ 0,39 |
 | Opus 5.5 · max | 48/48 | 18 min 06 s | 92.889 | 16 | US$ 3,77 |
 
-El pensamiento aumentó en cada nivel; las revisiones crecieron poco hasta `high` (Fable 3 → 7; en Opus se mantuvieron, 5 → 4) y se dispararon en `xhigh` y `max` (Fable 25, Opus 16). Son tareas cortas: no muestran dónde ayuda un esfuerzo alto (trabajo largo, problema abierto). Los cuadros completos, con los 5 niveles, están en `exemplos/`.
+El pensamiento aumentó en cada nivel; las revisiones crecieron poco hasta `high` (Fable 3 → 7; en Opus casi no cambiaron, 5 → 4) y se dispararon en `xhigh` y `max` (Fable 25, Opus 16). Son tareas cortas: no muestran dónde ayuda un esfuerzo alto (trabajo largo, problema abierto). Los cuadros completos, con los 5 niveles, están en `exemplos/`.
 
 Repetición (ruido): Fable 5.2 en la tarea `carrinho` (carrito), `low` y `high` 3 veces cada uno → todas 12/12; `low` 26–33 s, `high` 39–49 s, y el `high` siempre pensó más. En cambio, el número de herramientas varió de 3 a 12 entre rondas iguales: compara el razonamiento y el tiempo, no un recuento aislado de herramientas (`exemplos/carrinho-repeticao/`).
 

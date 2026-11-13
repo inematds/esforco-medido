@@ -37,7 +37,7 @@ combinação. **Todas as 30 tiraram nota máxima.** O que mudou foi o resto (som
 | Opus 5.5 · medium | 48/48 | 1 min 29 s | 760 | 4 | US$ 0,39 |
 | Opus 5.5 · max | 48/48 | 18 min 06 s | 92.889 | 16 | US$ 3,77 |
 
-O pensamento subiu em todo degrau; as conferências cresceram pouco até o `high` (Fable 3 → 7; no Opus ficaram iguais, 5 → 4) e saltaram
+O pensamento subiu em todo degrau; as conferências cresceram pouco até o `high` (Fable 3 → 7; no Opus quase não mudaram, 5 → 4) e saltaram
 no `xhigh` e no `max` (Fable 25, Opus 16). São tarefas curtas: elas não mostram onde o esforço alto ajuda (trabalho longo, problema aberto). Os quadros
 completos, com os 5 níveis, estão em `exemplos/`.
 
