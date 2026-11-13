@@ -16,7 +16,8 @@
 #     CLAUDE.md global, seus hooks, plugins, skills nem MCP (isso mudaria o comportamento que você quer medir). Só a credencial
 #     da assinatura é ligada (link). --sem-isolar roda com tudo seu (use no macOS se o login falhar: lá ele fica no Keychain).
 #   - ANTHROPIC_API_KEY sai do ambiente: mede na ASSINATURA. Para medir na API de propósito: MEDIR_USAR_API=1.
-#   - ferramentas liberadas: Read, Edit, Write, Glob, Grep e Bash só para python3 (o modelo pode rodar os testes, se quiser).
+#   - ferramentas liberadas: Read, Edit, Write, Glob, Grep e Bash para python3 (o modelo pode rodar os testes); comandos só de
+#     leitura (cat, ls) e arquivos de rascunho fora do projeto o Claude Code também aceita no modo acceptEdits.
 #   - ordem: esforço de baixo para cima, os mais caros por último. Max pode levar muito tempo e gastar bastante do limite.
 #   - saída: resultados/<tarefa>-<data>/ (bruto .jsonl de cada rodada + RESULTADO.md + resultado.json).
 set -uo pipefail
